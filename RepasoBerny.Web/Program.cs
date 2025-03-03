@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using RepasoBerny.Shared.Entities;
 using RepasoBerny.Web.Data;
+using RepasoBerny.Web.Helpers;
 
 namespace RepasoBerny.Web
 {
@@ -13,8 +16,22 @@ namespace RepasoBerny.Web
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext <DataContext>(x => x.UseSqlServer("name = con"));
+            builder.Services.AddScoped<IUserHelper, UserHelper>();
+            builder.Services.AddTransient<Seeder>();
+            builder.Services.AddIdentity<User, IdentityRole>(
+                x=>
+                {
+                    x.User.RequireUniqueEmail = true;
+                    x.Password.RequireDigit = false;
+                    x.Password.RequireLowercase = false;
+                    x.Password.RequireUppercase = false;
+                    x.Password.RequireNonAlphanumeric = false;
+                    x.Password.RequiredUniqueChars = 0;
+                    x.Password.RequiredLength = 6;
+                }).AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();
 
             var app = builder.Build();
+            SeederApp(app);
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -36,6 +53,16 @@ namespace RepasoBerny.Web
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+        }
+
+        private static void SeederApp(WebApplication app)
+        {
+            IServiceScopeFactory? serviceScopeFactory = app.Services.GetService<IServiceScopeFactory>();
+            using (IServiceScope? serviceScope = serviceScopeFactory!.CreateScope())
+            {
+                Seeder? seeder = serviceScope.ServiceProvider.GetService<Seeder>();
+                seeder!.SeedAsync().Wait();
+            }
         }
     }
 }

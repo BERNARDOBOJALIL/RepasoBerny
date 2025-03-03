@@ -14,5 +14,7 @@ namespace RepasoBerny.Shared.Entities
         [Display(Name = "Ciudad")]
         [MaxLength(70, ErrorMessage = "El campo {0} debe tener máximo {1} caracteres")]
         public string? Name { get; set; }
+
+        public ICollection <User>? Users { get; set; }
     }
 }
