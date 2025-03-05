@@ -19,17 +19,49 @@ namespace RepasoBerny.Web.Controllers
             this.userHelper = userHelper;
             this.configuration = configuration;
         }
-        [HttpPost("Login")]
-        public async Task<ActionResult> Login([FromBody]LoginDTO loginDTO)
+        //Get
+        [HttpGet]
+        public IActionResult Login()
         {
-            var result = await userHelper.LoginAsync(loginDTO);
-            if (result.Succeeded)
+            if (User.Identity.IsAuthenticated)
             {
-                var user = await userHelper.GetUserAsync(loginDTO.Email);
-                return Ok(user);
+                return RedirectToAction(nameof(Index), "Home");
             }
-            return BadRequest("Useario o contraseña incorrecta");
+            return View(new LoginDTO());
         }
+        // Post
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginDTO loginDTO)
+        {
+            if(ModelState.IsValid)
+            {
+                Microsoft.AspNetCore.Identity.SignInResult result = await userHelper.LoginAsync(loginDTO);
+                if (result.Succeeded)
+                {
+                    if (Request.Query.Keys.Contains("ReturnUrl"))
+                    {
+                        return Redirect(Request.Query["ReturnUrl"].First());
+                    }
+                   return RedirectToAction(nameof(Index), "Home");
+                }
+                ModelState.AddModelError(string.Empty, "Email o contraseña incorrecta");
+            }
+            return View(loginDTO);
+        }
+
+
+
+        //[HttpPost("Login")]
+        //public async Task<ActionResult> Login([FromBody]LoginDTO loginDTO)
+        //{
+        //    var result = await userHelper.LoginAsync(loginDTO);
+        //    if (result.Succeeded)
+        //    {
+        //        var user = await userHelper.GetUserAsync(loginDTO.Email);
+        //        return Ok(user);
+        //    }
+        //    return BadRequest("Useario o contraseña incorrecta");
+        //}
         private object? BuildToken(User user)
         {
             var claims = new List<Claim>
