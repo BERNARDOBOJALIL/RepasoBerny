@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using RepasoBerny.Shared.DTO;
 using RepasoBerny.Shared.Entities;
 
 namespace RepasoBerny.Web.Helpers
@@ -10,7 +11,7 @@ namespace RepasoBerny.Web.Helpers
         Task CheckRoleAsync(string roleName);
         Task AddUserToRoleAsync(User user, string roleName);
         Task<bool> IsUserInRoleAsync(User user, string roleName);
-        //Task<SignInResult> LoginAsync(LoginDTO login);
+        Task<SignInResult> LoginAsync(LoginDTO login);
         Task LogoutAsync();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using RepasoBerny.Shared.DTO;
 using RepasoBerny.Shared.Entities;
 using RepasoBerny.Web.Data;
 
@@ -59,10 +60,10 @@ namespace RepasoBerny.Web.Helpers
             return await userManager.IsInRoleAsync(user, roleName);
         }
 
-        //public async Task<SignInResult> LoginAsync(LoginDTO login)
-        //{
-        //    return await signInManager.PasswordSignInAsync(login.Email, login.Password, false, false);
-        //}
+        public async Task<SignInResult> LoginAsync(LoginDTO login)
+        {
+            return await signInManager.PasswordSignInAsync(login.Email, login.Password, false, false);
+        }
 
         public async Task LogoutAsync()
         {

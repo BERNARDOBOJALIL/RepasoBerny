@@ -14,15 +14,16 @@ namespace RepasoBerny.Shared.Entities
         [MaxLength(100, ErrorMessage = "El campo {0} debe tener máximo {1} caractere ")]
         [Display(Name = "Nombre(s)")]
 
-        public string? FirstName { get; set; }
+        public string FirstName { get; set; } = null!;
 
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         [MaxLength(100, ErrorMessage = "El campo {0} debe tener máximo {1} caractere ")]
         [Display(Name = "Apellido(s)")]
+        [DataType(DataType.ImageUrl)]
 
-        public string? LastName { get; set; }
+        public string LastName { get; set; } = null!;
         [Display(Name = "Foto")]
-        public string? PhotoUrl { get; set; }
+        public string? PhotoUrl { get; set; } = null!;
 
         public UserType UserType { get; set; }
 
