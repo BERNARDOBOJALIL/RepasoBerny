@@ -14,15 +14,40 @@
                 SemanticProperties.Description="dot net bot in a race car number eight" />
 
             <Label
-                Text="Hello, World!"
+                Text="Bienvenido Bernycrack!"
                 Style="{StaticResource Headline}"
                 SemanticProperties.HeadingLevel="Level1" />
 
             <Label
-                Text="Welcome to &#10;.NET Multi-platform App UI"
+                Text="Proyecto Arquitectura"
                 Style="{StaticResource SubHeadline}"
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+
+            <Label
+                x:Name="LabelRotar"
+                Text = "Rotame"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="40"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                BindingContext="{x:Reference Name=SliderRotar}"
+                Rotation="{Binding Path=Value}"
+                
+                />
+
+            <Slider
+                x:Name="SliderRotar"
+                Maximum="360"
+                VerticalOptions="Center"
+                />
+
+            <Slider
+                x:Name="SliderOpacity"
+                Maximum="1"
+                VerticalOptions="Center"
+                Value="{Binding Source={x:Reference LabelRotar}, Path=Opacity}"
+                />  
 
             <Button
                 x:Name="CounterBtn"

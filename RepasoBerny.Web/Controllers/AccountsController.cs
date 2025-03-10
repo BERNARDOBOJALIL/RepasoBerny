@@ -48,7 +48,11 @@ namespace RepasoBerny.Web.Controllers
             }
             return View(loginDTO);
         }
-
+         public async Task<IActionResult> Logout()
+        {
+            await userHelper.LogoutAsync();
+            return RedirectToAction(nameof(Index), "Home");
+        }
 
 
         //[HttpPost("Login")]

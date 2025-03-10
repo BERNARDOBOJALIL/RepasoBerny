@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RepasoBerny.Mobile.Pages.LoginPage"
+             Title="LoginPage">
+    <ScrollView>
+        <VerticalStackLayout>
+        <Image Source="berny.png"
+               HeightRequest="200"
+               WidthRequest="200"
+               />
+
+        <Label 
+            Text="username"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Entry
+            />
+
+        <Label 
+            Text="Password"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Entry IsPassword="True"
+            />
+
+        <Button 
+            Text="Login"
+            />
+        <Button 
+            Text="Register"
+            />  
+    </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
