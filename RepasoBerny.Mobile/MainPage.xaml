@@ -1,60 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RepasoBerny.Mobile.MainPage">
+             x:Class="RepasoBerny.Mobile.MainPage"
+             xmlns:vm="clr-namespace:RepasoBerny.Mobile.ViewModel"
+             x:DataType="vm:ViewModelTest">
+    <ContentPage.BindingContext>
+        <vm:ViewModelTest/>
+    </ContentPage.BindingContext>
 
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
-            Spacing="25">
-            <Image
-                Source="dotnet_bot.png"
-                HeightRequest="185"
-                Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a race car number eight" />
-
+            Spacing="25"
+            VerticalOptions="Center">
+            
             <Label
-                Text="Bienvenido Bernycrack!"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
-
-            <Label
-                Text="Proyecto Arquitectura"
-                Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
-
-            <Label
-                x:Name="LabelRotar"
-                Text = "Rotame"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="40"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                BindingContext="{x:Reference Name=SliderRotar}"
-                Rotation="{Binding Path=Value}"
-                
+                Text="{Binding Text}" />
+            <Button Text="Presioname"
+                    Command="{Binding CambiarTextoCommand}"
                 />
 
-            <Slider
-                x:Name="SliderRotar"
-                Maximum="360"
-                VerticalOptions="Center"
-                />
-
-            <Slider
-                x:Name="SliderOpacity"
-                Maximum="1"
-                VerticalOptions="Center"
-                Value="{Binding Source={x:Reference LabelRotar}, Path=Opacity}"
-                />  
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me" 
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Fill" />
+            
         </VerticalStackLayout>
     </ScrollView>
 
