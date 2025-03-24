@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RepasoBerny.Mobile.Pages.Seguimiento">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Barra superior con título -->
+        <Grid Grid.Row="0" BackgroundColor="{StaticResource YellowCoppel}">
+            <Label Text="Seguimiento" 
+                   TextColor="{StaticResource BlueCoppel}"
+                   FontSize="18" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Center" 
+                   Padding="0,15"/>
+        </Grid>
+
+        <!-- Lista de seguimiento -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="0">
+                <Border Margin="15,10" Padding="15" StrokeShape="RoundRectangle 10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <VerticalStackLayout Grid.Column="0">
+                            <Label Text="Emilio Ramírez se ha registrado!" FontAttributes="Bold"/>
+                            <Label Text="3-10-2025" TextColor="Gray"/>
+                            <Label Text="Ánimalo a seguir con su progreso" TextColor="Gray"/>
+                        </VerticalStackLayout>
+                        <Label Grid.Column="1" Text=">" VerticalOptions="Center" TextColor="Gray"/>
+                    </Grid>
+                </Border>
+
+                <Border Margin="15,10" Padding="15" StrokeShape="RoundRectangle 10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <VerticalStackLayout Grid.Column="0">
+                            <Label Text="Paco Perez se ha registrado!" FontAttributes="Bold"/>
+                            <Label Text="10-10-2025" TextColor="Gray"/>
+                            <Label Text="Ánimalo a seguir con su progreso" TextColor="Gray"/>
+                        </VerticalStackLayout>
+                        <Label Grid.Column="1" Text=">" VerticalOptions="Center" TextColor="Gray"/>
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
