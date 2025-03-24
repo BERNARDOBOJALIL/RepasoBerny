@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:microcharts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             x:Class="RepasoBerny.Mobile.Pages.ReportesAnalisis"
+             BackgroundColor="White">
+    <VerticalStackLayout>
+        <Frame BackgroundColor="#FFD700" Padding="10" HasShadow="False">
+            <Label Text="Reportes y análisis" 
+                   FontSize="20" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center" 
+                   TextColor="#007AFF"/>
+        </Frame>
+
+        <Frame Padding="10" Margin="10" BackgroundColor="LightGrey" HasShadow="False">
+            <StackLayout>
+                <Label Text="Periodo:" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                <Picker BackgroundColor="LightYellow" TextColor="Black">
+                    <Picker.Items>
+                        <x:String>Último mes</x:String>
+                        <x:String>Última semana</x:String>
+                        <x:String>Último año</x:String>
+                    </Picker.Items>
+                </Picker>
+            </StackLayout>
+        </Frame>
+
+        <Frame Padding="10" Margin="10" BackgroundColor="LightGrey" HasShadow="False">
+            <StackLayout>
+                <Label Text="Progreso Mensual de usuarios registrados" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Black"/>
+                <microcharts:ChartView HeightRequest="150" Chart="{Binding Chart}" BackgroundColor="White"/>
+            </StackLayout>
+        </Frame>
+
+
+        <Frame Padding="10" Margin="10" BackgroundColor="LightGrey" HasShadow="False">
+            <StackLayout>
+                <Label Text="Métricas clave" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Black"/>
+                <Grid ColumnDefinitions="*,*,*,*" Padding="5">
+                    <StackLayout Grid.Column="0" HorizontalOptions="Center" BackgroundColor="#FFFFFF" Margin="10" >
+                        <Label Text="24" FontSize="16" FontAttributes="Bold" TextColor="#007AFF" HorizontalOptions="Center"/>
+                        <Label Text="Usuarios activos" FontSize="14" HorizontalOptions="Center" TextColor="Black"/>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1" HorizontalOptions="Center">
+                        <Label Text="3" FontSize="16" FontAttributes="Bold" TextColor="#007AFF" HorizontalOptions="Center"/>
+                        <Label Text="Nuevos hoy" FontSize="14" HorizontalOptions="Center" TextColor="Black" />
+                    </StackLayout>
+                    <StackLayout Grid.Column="2" HorizontalOptions="Center">
+                        <Label Text="1" FontSize="16" FontAttributes="Bold" TextColor="#007AFF" HorizontalOptions="Center"/>
+                        <Label Text="Promedio diario" FontSize="14" HorizontalOptions="Center" TextColor="Black"/>
+                    </StackLayout>
+                    <StackLayout Grid.Column="3" HorizontalOptions="Center">
+                        <Label Text="2" FontSize="16" FontAttributes="Bold" TextColor="#007AFF" HorizontalOptions="Center"/>
+                        <Label Text="Arriba del promedio" FontSize="14" HorizontalOptions="Center" TextColor="Black"/>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+        </Frame>
+
+
+        <Frame Padding="10" Margin="10" BackgroundColor="LightGrey" HasShadow="False">
+            <StackLayout>
+                <Label Text="Última actividad de usuarios registrados" 
+               FontAttributes="Bold" 
+               HorizontalOptions="Center"
+               FontSize="16"/>
+
+                <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto,Auto,Auto" Padding="5" >
+                    <!-- Encabezados -->
+                    <Frame BackgroundColor="#FFD700" Grid.Column="0" Grid.Row="0">
+                        <Label Text="Nombre" FontAttributes="Bold" HorizontalOptions="Center"/>
+                    </Frame>
+                    <Frame BackgroundColor="#FFD700" Grid.Column="1" Grid.Row="0">
+                        <Label Text="Última Actividad" FontAttributes="Bold" HorizontalOptions="Center"/>
+                    </Frame>
+                    <Frame BackgroundColor="#FFD700" Grid.Column="2" Grid.Row="0">
+                        <Label Text="Estado" FontAttributes="Bold" HorizontalOptions="Center"/>
+                    </Frame>
+
+                    <!-- Filas de datos -->
+                    <Label Text="JaviTacos" Grid.Column="0" Grid.Row="1" HorizontalOptions="Center"/>
+                    <Label Text="Hace 10 min" Grid.Column="1" Grid.Row="1" HorizontalOptions="Center"/>
+                    <Label Text="Activo" Grid.Column="2" Grid.Row="1" HorizontalOptions="Center" TextColor="Blue"/>
+
+                    <Label Text="Cemas 'Julita'" Grid.Column="0" Grid.Row="2" HorizontalOptions="Center"/>
+                    <Label Text="Hace 2 hrs" Grid.Column="1" Grid.Row="2" HorizontalOptions="Center"/>
+                    <Label Text="Activo" Grid.Column="2" Grid.Row="2" HorizontalOptions="Center" TextColor="Blue"/>
+
+                    <Label Text="Antojitos 'Perez'" Grid.Column="0" Grid.Row="3" HorizontalOptions="Center"/>
+                    <Label Text="Hace 1 día" Grid.Column="1" Grid.Row="3" HorizontalOptions="Center"/>
+                    <Label Text="Activo" Grid.Column="2" Grid.Row="3" HorizontalOptions="Center" TextColor="Blue"/>
+                </Grid>
+            </StackLayout>
+        </Frame>
+
+
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <Button Text="Exportar a PDF" BackgroundColor="#FFD700" WidthRequest="150" Margin="5"/>
+            <Button Text="Exportar a PDF" BackgroundColor="#00AEEF" TextColor="White" WidthRequest="150" Margin="5"/>
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>
