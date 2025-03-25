@@ -13,11 +13,13 @@
         <Grid Grid.Row="0" BackgroundColor="{StaticResource YellowCoppel}">
             <Label Text="Seguimiento" 
                    TextColor="{StaticResource BlueCoppel}"
-                   FontSize="18" 
+                   FontSize="24" 
+                   FontAttributes="Bold"
                    HorizontalOptions="Center" 
                    VerticalOptions="Center" 
-                   Padding="0,15"/>
+                   Margin="5"/>
         </Grid>
+
 
         <!-- Lista de seguimiento -->
         <ScrollView Grid.Row="1">
@@ -45,6 +47,76 @@
                         </Grid.ColumnDefinitions>
                         <VerticalStackLayout Grid.Column="0">
                             <Label Text="Paco Perez se ha registrado!" FontAttributes="Bold"/>
+                            <Label Text="10-10-2025" TextColor="Gray"/>
+                            <Label Text="Ánimalo a seguir con su progreso" TextColor="Gray"/>
+                        </VerticalStackLayout>
+                        <Label Grid.Column="1" Text=">" VerticalOptions="Center" TextColor="Gray"/>
+                    </Grid>
+                </Border>
+                <Border Margin="15,10" Padding="15" StrokeShape="RoundRectangle 10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <VerticalStackLayout Grid.Column="0">
+                            <Label Text="Sofia Aldama se ha registrado!" FontAttributes="Bold"/>
+                            <Label Text="10-10-2025" TextColor="Gray"/>
+                            <Label Text="Ánimalo a seguir con su progreso" TextColor="Gray"/>
+                        </VerticalStackLayout>
+                        <Label Grid.Column="1" Text=">" VerticalOptions="Center" TextColor="Gray"/>
+                    </Grid>
+                </Border>
+                <Border Margin="15,10" Padding="15" StrokeShape="RoundRectangle 10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <VerticalStackLayout Grid.Column="0">
+                            <Label Text="Pedro Caballero se ha registrado!" FontAttributes="Bold"/>
+                            <Label Text="10-10-2025" TextColor="Gray"/>
+                            <Label Text="Ánimalo a seguir con su progreso" TextColor="Gray"/>
+                        </VerticalStackLayout>
+                        <Label Grid.Column="1" Text=">" VerticalOptions="Center" TextColor="Gray"/>
+                    </Grid>
+                </Border>
+                <Border Margin="15,10" Padding="15" StrokeShape="RoundRectangle 10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <VerticalStackLayout Grid.Column="0">
+                            <Label Text="Luis Alvarez se ha registrado!" FontAttributes="Bold"/>
+                            <Label Text="10-10-2025" TextColor="Gray"/>
+                            <Label Text="Ánimalo a seguir con su progreso" TextColor="Gray"/>
+                        </VerticalStackLayout>
+                        <Label Grid.Column="1" Text=">" VerticalOptions="Center" TextColor="Gray"/>
+                    </Grid>
+                </Border>
+                <Border Margin="15,10" Padding="15" StrokeShape="RoundRectangle 10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <VerticalStackLayout Grid.Column="0">
+                            <Label Text="Eduardo Lopez se ha registrado!" FontAttributes="Bold"/>
+                            <Label Text="10-10-2025" TextColor="Gray"/>
+                            <Label Text="Ánimalo a seguir con su progreso" TextColor="Gray"/>
+                        </VerticalStackLayout>
+                        <Label Grid.Column="1" Text=">" VerticalOptions="Center" TextColor="Gray"/>
+                    </Grid>
+                </Border>
+                <Border Margin="15,10" Padding="15" StrokeShape="RoundRectangle 10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <VerticalStackLayout Grid.Column="0">
+                            <Label Text="Bernardo Bojalil se ha registrado!" FontAttributes="Bold"/>
                             <Label Text="10-10-2025" TextColor="Gray"/>
                             <Label Text="Ánimalo a seguir con su progreso" TextColor="Gray"/>
                         </VerticalStackLayout>

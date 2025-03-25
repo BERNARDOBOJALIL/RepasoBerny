@@ -4,17 +4,27 @@
              x:Class="RepasoBerny.Mobile.Pages.ReportesAnalisis"
              xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
              BackgroundColor="White">
-
-    <VerticalStackLayout>
-        <Frame BackgroundColor="{StaticResource YellowCoppel}" Padding="10" HasShadow="False">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0" BackgroundColor="{StaticResource YellowCoppel}">
             <Label Text="Reportes y análisis" 
-                   FontSize="20" 
-                   FontAttributes="Bold" 
+                   TextColor="{StaticResource BlueCoppel}"
+                   FontSize="24" 
+                   FontAttributes="Bold"
                    HorizontalOptions="Center" 
-                   TextColor="#007AFF"/>
-        </Frame>
+                   VerticalOptions="Center" 
+                   Margin="5"/>
+        </Grid>
 
-        <Frame Padding="10" Margin="10" BackgroundColor="LightGrey" HasShadow="False">
+    <ScrollView Grid.Row="1">
+            <VerticalStackLayout>
+
+                <Frame Padding="10" Margin="10" BackgroundColor="LightGrey" HasShadow="False">
             <StackLayout>
                 <Label Text="Periodo:" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
                 <Picker BackgroundColor="LightYellow" TextColor="Black">
@@ -120,5 +130,9 @@
             <Button Text="Exportar a PDF" BackgroundColor="#FFD700" WidthRequest="150" Margin="5"/>
             <Button Text="Exportar a PDF" BackgroundColor="#00AEEF" TextColor="White" WidthRequest="150" Margin="5"/>
         </StackLayout>
+                
+        
     </VerticalStackLayout>
+    </ScrollView>
+    </Grid>
 </ContentPage>
