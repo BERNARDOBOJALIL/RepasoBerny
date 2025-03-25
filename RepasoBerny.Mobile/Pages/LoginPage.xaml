@@ -7,7 +7,7 @@
     <Grid.RowDefinitions>
         <RowDefinition Height="5"/>
         <!-- Línea amarilla -->
-        <RowDefinition Height="50"/>
+        <RowDefinition Height="45"/>
         <!-- Barra amarilla con texto -->
         <RowDefinition Height="*"/>
         <!-- Contenido principal -->
@@ -24,7 +24,7 @@
             FontAttributes="Bold"
             HorizontalOptions="Center"
             VerticalOptions="Center"
-            TextColor="#00a8e0"
+            TextColor="{StaticResource BlueCoppel}"
             Margin="4"/>
     </StackLayout>
 
@@ -76,7 +76,7 @@
 
             <!-- Botón de login -->
             <Button Text="Continuar"
-                    BackgroundColor="#00a8e0"
+                    BackgroundColor="{StaticResource BlueCoppel}"
                     TextColor="White"
                     Margin="0,20"
                     CornerRadius="30"

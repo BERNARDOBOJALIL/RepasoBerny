@@ -12,16 +12,16 @@
             <!-- Contenido principal -->
         </Grid.RowDefinitions>
 
-        <BoxView Grid.Row="0" HeightRequest="5" BackgroundColor="#ffd842"/>
+        <BoxView Grid.Row="0" HeightRequest="5" BackgroundColor="{StaticResource YellowCoppel}"/>
 
-        <StackLayout Grid.Row="1" BackgroundColor="#ffd842" Padding="0">
+        <StackLayout Grid.Row="1" BackgroundColor="{StaticResource YellowCoppel}" Padding="0">
             <Label 
                 Text="Registro"
                 FontSize="24"
                 FontAttributes="Bold"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
-                TextColor="#00a8e0"
+                TextColor="{StaticResource BlueCoppel}"
                 Margin="5"/>
         </StackLayout>
 
@@ -112,7 +112,7 @@
 
                 <!-- Botón de registro -->
                 <Button Text="Registrate"
-                        BackgroundColor="#00a8e0"
+                        BackgroundColor="{StaticResource BlueCoppel}"
                         TextColor="White"
                         Margin="0,20"
                         CornerRadius="30"
