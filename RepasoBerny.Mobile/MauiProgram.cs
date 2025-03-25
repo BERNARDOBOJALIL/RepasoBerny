@@ -1,5 +1,6 @@
-﻿using Microcharts.Maui;
+﻿using SkiaSharp;
 using Microsoft.Extensions.Logging;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace RepasoBerny.Mobile
 {
@@ -10,7 +11,7 @@ namespace RepasoBerny.Mobile
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .UseMicrocharts()
+                .UseSkiaSharp()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
