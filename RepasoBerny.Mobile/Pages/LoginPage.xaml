@@ -44,28 +44,29 @@
                 VerticalOptions="Center" 
                 HorizontalOptions="Start" 
                 Margin="0,10"/>
-            <Entry
-                Placeholder="Ingresa tu usuario"
-                Margin="0,10"
-                BackgroundColor="#f0f0f0"
-                HorizontalTextAlignment="Center"
-                />
-
-            <!-- Campo de contraseña -->
+                <Frame CornerRadius="15" Padding="0" Margin="0,10">
+                    <Entry
+                    Placeholder="Ingresa tu usuario"
+                    Margin="0,10"
+                    HorizontalTextAlignment="Start"
+                    />
+                </Frame>
+                <!-- Campo de contraseña -->
             <Label 
                 Text="Contraseña"
                 VerticalOptions="Center" 
                 HorizontalOptions="Start"
                 Margin="0,10"/>
-            <Entry
-                IsPassword="True"
-                Placeholder="Ingresa tu contraseña"
-                Margin="0,10"
-                BackgroundColor="#f0f0f0"
-                HorizontalTextAlignment="Center"
-                />
+                <Frame  CornerRadius="15" Padding="0" Margin="0,10">
+                    <Entry
+                    IsPassword="True"
+                    Placeholder="Ingresa tu contraseña"
+                    Margin="0,10"
+                    HorizontalTextAlignment="Start"
+                    />
+                </Frame>
 
-            <!-- Indicaciones sobre la contraseña -->
+                <!-- Indicaciones sobre la contraseña -->
             <Label 
                 Text="Debe contener una mayúscula y números"
                 FontSize="12"
