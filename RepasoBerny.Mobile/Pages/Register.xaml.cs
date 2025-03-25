@@ -1,8 +1,8 @@
 namespace RepasoBerny.Mobile.Pages;
 
-public partial class LoginPage : ContentPage
+public partial class Register : ContentPage
 {
-	public LoginPage()
+	public Register()
 	{
 		InitializeComponent();
 	}

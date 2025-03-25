@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RepasoBerny.Mobile.Pages.Register">
+    <Grid>
+        <!-- Definimos las filas para la estructura -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <!-- Línea amarilla -->
+            <RowDefinition Height="50"/>
+            <!-- Barra amarilla con texto -->
+            <RowDefinition Height="*"/>
+            <!-- Contenido principal -->
+        </Grid.RowDefinitions>
+
+        <!-- Línea amarilla en la parte superior -->
+        <BoxView Grid.Row="0" HeightRequest="5" BackgroundColor="{StaticResource YellowCoppel}"/>
+
+        <!-- Barra amarilla con texto "Registro" -->
+        <StackLayout Grid.Row="1" BackgroundColor="{StaticResource YellowCoppel}" Padding="0">
+            <Label 
+                Text="Registro"
+                FontSize="24"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                TextColor="#00a8e0"
+                Margin="5"/>
+        </StackLayout>
+
+        <!-- Contenido principal (Formulario de registro) -->
+        <ScrollView Grid.Row="2">
+            <VerticalStackLayout Padding="20">
+
+                <!-- Campo de Nombre -->
+                <Label Text="Nombre"
+                       HorizontalOptions="Start"
+                       Margin="0,10"/>
+                <Entry Placeholder="Ingresa tu nombre"
+                       BackgroundColor="#f0f0f0"
+                       Margin="0,10"
+                       HorizontalTextAlignment="Center"/>
+
+                <!-- Campo de Apellido -->
+                <Label Text="Apellido"
+                       HorizontalOptions="Start"
+                       Margin="0,10"/>
+                <Entry Placeholder="Ingresa tu apellido"
+                       BackgroundColor="#f0f0f0"
+                       Margin="0,10"
+                       HorizontalTextAlignment="Center"/>
+
+                <!-- Campo de Contraseña -->
+                <Label Text="Contraseña"
+                       HorizontalOptions="Start"
+                       Margin="0,10"/>
+                <Entry Placeholder="Ingresa una contraseña de 4 dígitos"
+                       IsPassword="True"
+                       BackgroundColor="#f0f0f0"
+                       Margin="0,10"
+                       HorizontalTextAlignment="Center"/>
+
+                <!-- Campo de Confirmar Contraseña -->
+                <Label Text="Confirmar contraseña"
+                       HorizontalOptions="Start"
+                       Margin="0,10"/>
+                <Entry Placeholder="Confirma tu contraseña"
+                       IsPassword="True"
+                       BackgroundColor="#f0f0f0"
+                       Margin="0,10"
+                       HorizontalTextAlignment="Center"/>
+
+                <!-- Campo de Código Postal -->
+                <Label Text="Código postal"
+                       HorizontalOptions="Start"
+                       Margin="0,10"/>
+                <Entry Placeholder="Ingresa tu código postal"
+                       BackgroundColor="#f0f0f0"
+                       Margin="0,10"
+                       HorizontalTextAlignment="Center"/>
+
+                <!-- Campo de Tipo de Cliente (Dropdown) -->
+                <Label Text="¿Qué tipo de cliente eres?"
+                       HorizontalOptions="Start"
+                       Margin="0,10"/>
+                <Picker BackgroundColor="#f0f0f0"
+                        Margin="0,10">
+                    <Picker.Items>
+                        <x:String>Selecciona una opción</x:String>
+                        <x:String>Cliente Bancoppel</x:String>
+                        <x:String>Crédito Coppel (tienda)</x:String>
+                        <x:String>Afore Coppel</x:String>
+                        <x:String>No soy cliente(tienda)</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <!-- Campo de Número de Teléfono con Extensión -->
+                <Label Text="No. de teléfono"
+                       HorizontalOptions="Start"
+                       Margin="0,10"/>
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <!-- Extensión del teléfono -->
+                    <Entry Placeholder="+52"
+                           BackgroundColor="#f0f0f0"
+                           WidthRequest="70"
+                           HorizontalTextAlignment="Center"/>
+                    <!-- Número celular -->
+                    <Entry Placeholder="Ingresa tu número celular"
+                           BackgroundColor="#f0f0f0"
+                           Keyboard="Telephone"
+                           HorizontalTextAlignment="Center"
+                           WidthRequest="200"/>
+                </StackLayout>
+
+                <!-- Aceptación de términos -->
+                <CheckBox HorizontalOptions="Start" Margin="0,10"/>
+                <Label Text="Acepto los términos y condiciones y el aviso de privacidad"
+                       HorizontalOptions="Start"
+                       Margin="0,10"/>
+
+                <!-- Mensaje de seguridad -->
+                <Label Text="Por tu seguridad enviamos un mensaje a tu teléfono para validar tu información."
+                       FontSize="12"
+                       TextColor="Gray"
+                       HorizontalOptions="Start"
+                       Margin="0,5"/>
+
+                <!-- Botón de registro -->
+                <Button Text="Registrate"
+                        BackgroundColor="#00a8e0"
+                        TextColor="White"
+                        Margin="0,20"
+                        CornerRadius="30"
+                        HeightRequest="50"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
