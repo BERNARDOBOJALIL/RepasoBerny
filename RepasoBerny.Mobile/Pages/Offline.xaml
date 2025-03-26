@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RepasoBerny.Mobile.Pages.Offline"
+             Title="Offline">
+    <ScrollView>
+        <VerticalStackLayout  Spacing="25">
+            <!-- Título -->
+            <Frame  CornerRadius="0" BackgroundColor="{StaticResource YellowCoppel}">
+                <Label Text="Modo Offline" FontSize="24" FontAttributes="Bold" TextColor="#007ACC" HorizontalOptions="Center" />
+            </Frame>
+
+            <!-- Estado Offline -->
+            <Frame Margin="20,0,20,0" BackgroundColor="{StaticResource Gray100}">
+                <HorizontalStackLayout Spacing="25" HorizontalOptions="Center">
+                    <Ellipse WidthRequest="50" HeightRequest="50" Fill="Red" />
+                    <VerticalStackLayout>
+                        <Label Text="Modo offline" FontSize="18" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center"/>
+                        <Label Text="Último intento hace 2 horas" FontSize="14" TextColor="Black" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                    <Button Text="Reintentar" BackgroundColor="#00AEEF" TextColor="Black" CornerRadius="5" Padding="5,0" />
+                </HorizontalStackLayout>
+            </Frame>
+
+
+            <Frame Margin="20,0,20,0" BackgroundColor="{StaticResource Gray100}" >
+                <VerticalStackLayout >
+
+                    <Label Margin="0,0,0,15" HorizontalOptions="Center"  TextColor="Black" Text="Datos pendientes de sincronizar" FontSize="16" FontAttributes="Bold" />
+                    <Frame CornerRadius="10" BackgroundColor="Gray">
+                        <HorizontalStackLayout Spacing="25" HorizontalOptions="Center">
+                            <Frame WidthRequest="50" HeightRequest="50" CornerRadius="4" BackgroundColor="Yellow" Padding="0" Margin="0">
+                                <Label Text="4" FontSize="Default"  TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Frame>
+                            <VerticalStackLayout Spacing="10">
+                                <Label Text="Registros pendientes"  TextColor="Black" FontSize="14"/>
+                                <Label Text="Últimas 24 horas"  TextColor="Black" FontSize="12" />
+                            </VerticalStackLayout>
+                            <Button Text="Ver detalle" BackgroundColor="#00AEEF" TextColor="Black" CornerRadius="5" Padding="5,0" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Margin="20,0,20,0" BackgroundColor="{StaticResource Gray100}">
+                <VerticalStackLayout>
+                    <Label Text="Ajustes de sincronización" FontSize="16" TextColor="Black" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,15" />
+                    <VerticalStackLayout Spacing="15">
+                        <Frame BackgroundColor="Gray">
+                            <HorizontalStackLayout Spacing="25">
+                                <Label Text="Solo con Wi-Fi" TextColor="Black" VerticalOptions="Center" FontSize="14" />
+                                <Switch Grid.Column="1" HorizontalOptions="End" />
+                            </HorizontalStackLayout>
+                        </Frame>
+                        <Frame BackgroundColor="Gray">
+                            <HorizontalStackLayout Spacing="25">
+                                <Label Text="Sincronización automática" TextColor="Black" VerticalOptions="Center" FontSize="14" Grid.Row="1" />
+                                <Switch Grid.Column="1" Grid.Row="1" />
+                            </HorizontalStackLayout>
+                        </Frame>
+                        <Frame BackgroundColor="Gray">
+                            <HorizontalStackLayout Spacing="25">
+                                <Label Text="Notificar al sincronizar" TextColor="Black" VerticalOptions="Center" FontSize="14" Grid.Row="2" />
+                                <Switch HorizontalOptions="End" />
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Margin="20,0,20,0" BackgroundColor="{StaticResource Gray100}">
+                <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Label Text="Historial de sincronización" FontSize="16" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" />
+                    <Frame BackgroundColor="Gray">
+                        <Label Text="✔ 2 Registros sincronizados - Hoy, 12:30 hrs" TextColor="Black" FontSize="14"  />
+                    </Frame>
+                    <Frame BackgroundColor="Gray">
+                        <Label Text="❌ Sincronización fallida - Hoy, 11:15 hrs" TextColor="Black" FontSize="14"  />
+                    </Frame>
+                    <Frame BackgroundColor="Gray">
+                        <Label Text="✔ 2 Registros sincronizados - Hoy, 10:00 hrs" TextColor="Black" FontSize="14" />
+                    </Frame>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Botón de sincronización -->
+            <Button Margin="25,0,25,25" HeightRequest="80" Text="Sincronizar ahora 🔄" BackgroundColor="#00AEEF" TextColor="White" CornerRadius="10" FontSize="18" Padding="10" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
