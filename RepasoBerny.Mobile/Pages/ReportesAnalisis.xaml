@@ -6,14 +6,25 @@
              BackgroundColor="White">
 
     <StackLayout>
-        <!-- Título -->
-        <Frame BackgroundColor="{StaticResource YellowCoppel}" Padding="10" HasShadow="False" BorderColor="Transparent" CornerRadius="0">
-            <Label Text="Reportes y análisis" 
-           TextColor="{StaticResource BlueCoppel}"
-           FontSize="24" 
-           FontAttributes="Bold"
-           HorizontalOptions="Center" />
-        </Frame>
+        <!-- Detectar el tap en toda la pantalla -->
+        <StackLayout.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnScreenTapped"/>
+        </StackLayout.GestureRecognizers>
+
+        <!-- Línea amarilla en la parte superior -->
+        <BoxView Grid.Row="0" HeightRequest="5" BackgroundColor="{StaticResource YellowCoppel}"/>
+
+        <!-- Barra amarilla con texto "Inicia sesión" -->
+        <StackLayout Grid.Row="1" BackgroundColor="{StaticResource YellowCoppel}" Padding="0">
+            <Label 
+        Text="Reportes y análisis"
+        FontSize="24"
+        FontAttributes="Bold"
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+        TextColor="{StaticResource BlueCoppel}"
+        Margin="4"/>
+        </StackLayout>
 
 
 

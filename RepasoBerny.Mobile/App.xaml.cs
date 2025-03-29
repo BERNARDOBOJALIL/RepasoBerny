@@ -5,7 +5,7 @@
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new Pages.Chat());
+            MainPage = new NavigationPage(new Pages.LoginPage());
             //MainPage = new AppShell();
 
         }

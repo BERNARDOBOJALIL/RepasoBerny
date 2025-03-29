@@ -15,6 +15,11 @@ public partial class Chat : ContentPage
         BindingContext = this;
     }
 
+    private async void OnScreenTapped(object sender, TappedEventArgs e)
+    {
+        await Navigation.PushAsync(new LoginPage()); 
+    }
+
     private void LoadNotifications()
     {
         FirstNotification = new NotificationItem

@@ -10,6 +10,11 @@
          1) Barra fija (fila 0)
          2) Contenido desplazable (fila 1) -->
     <Grid>
+        <!-- Detectar el tap en toda la pantalla -->
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnScreenTapped"/>
+        </Grid.GestureRecognizers>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />

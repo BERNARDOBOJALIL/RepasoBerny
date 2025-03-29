@@ -4,6 +4,11 @@
              x:Class="RepasoBerny.Mobile.Pages.Seguimiento">
 
     <Grid>
+		<!-- Detectar el tap en toda la pantalla -->
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnScreenTapped"/>
+        </Grid.GestureRecognizers>
+		
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>

@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RepasoBerny.Mobile.Pages.Offline"
-             Title="Offline">
+             x:Class="RepasoBerny.Mobile.Pages.Offline">
     <ScrollView>
         <VerticalStackLayout  Spacing="25">
-            <!-- Título -->
-            <Frame  CornerRadius="0" BackgroundColor="{StaticResource YellowCoppel}">
-                <Label Text="Modo Offline" FontSize="24" FontAttributes="Bold" TextColor="#007ACC" HorizontalOptions="Center" />
-            </Frame>
+            <!-- Detectar el tap en toda la pantalla -->
+            <VerticalStackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnScreenTapped"/>
+            </VerticalStackLayout.GestureRecognizers>
+
+            
+            <!-- Barra amarilla con texto "Inicia sesión" -->
+            <StackLayout Grid.Row="1" BackgroundColor="{StaticResource YellowCoppel}" Padding="0">
+                <Label 
+                    Text="Modo Offline"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    TextColor="{StaticResource BlueCoppel}"
+                    Margin="4"/>
+                        </StackLayout>
+
 
             <!-- Estado Offline -->
             <Frame Margin="20,0,20,0" BackgroundColor="{StaticResource Gray100}">

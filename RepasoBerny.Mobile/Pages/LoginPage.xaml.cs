@@ -1,9 +1,17 @@
-namespace RepasoBerny.Mobile.Pages;
+using Microsoft.Maui.Controls;
 
-public partial class LoginPage : ContentPage
+namespace RepasoBerny.Mobile.Pages
 {
-	public LoginPage()
-	{
-		InitializeComponent();
-	}
+    public partial class LoginPage : ContentPage
+    {
+        public LoginPage()
+        {
+            InitializeComponent();
+        }
+
+        private async void OnScreenTapped(object sender, TappedEventArgs e)
+        {
+            await Navigation.PushAsync(new Register()); 
+        }
+    }
 }
