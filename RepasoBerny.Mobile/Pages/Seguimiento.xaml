@@ -17,12 +17,13 @@
         <!-- Barra superior con título -->
         <Grid Grid.Row="0" BackgroundColor="{StaticResource YellowCoppel}">
             <Label Text="Seguimiento" 
+                   
                    TextColor="{StaticResource BlueCoppel}"
                    FontSize="24" 
                    FontAttributes="Bold"
                    HorizontalOptions="Center" 
                    VerticalOptions="Center" 
-                   Margin="5"/>
+                   Margin="10"/>
         </Grid>
 
 
