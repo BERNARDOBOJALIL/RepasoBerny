@@ -8,6 +8,6 @@ public partial class LoginPage : ContentPage
 	}
     private async void OnScreenTapped(object sender, TappedEventArgs e)
     {
-        await Navigation.PushAsync(new Offline());
+        await Navigation.PushAsync(new Register());
     }
 }

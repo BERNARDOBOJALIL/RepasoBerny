@@ -150,6 +150,14 @@ public partial class ReportesAnalisis : ContentPage
     {
         await Navigation.PushAsync(new Offline()); 
     }
+    private void OnVerDetallesClicked(object sender, EventArgs e)
+    {
+        // Alternar visibilidad
+        contenidoOculto.IsVisible = !contenidoOculto.IsVisible;
+
+        // Cambiar texto del botón
+        btnDetalles.Text = contenidoOculto.IsVisible ? "Ocultar detalles" : "Ver detalles";
+    }
 }
 
 

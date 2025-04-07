@@ -4,12 +4,43 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:RepasoBerny.Mobile"
+    xmlns:pages="clr-namespace:RepasoBerny.Mobile.Pages"
     Shell.FlyoutBehavior="Disabled"
-    Title="RepasoBerny.Mobile">
+    Title="RepasoBerny.Mobile"
+    Shell.TabBarBackgroundColor ="{StaticResource YellowCoppel}"
+    Shell.TabBarForegroundColor="White"
+    Shell.TabBarTitleColor="{StaticResource BlueCoppel}"
+    Shell.TabBarUnselectedColor="White">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+
+        
+        <!-- Registro -->
+        <ShellContent
+            Icon="registro.svg"
+            ContentTemplate="{DataTemplate pages:Register}" />
+
+        <!-- Seguimiento -->
+        <ShellContent
+            Icon="seguimiento.svg"
+            ContentTemplate="{DataTemplate pages:Seguimiento}" />
+
+        <ShellContent
+            Icon="home.sgv"
+            ContentTemplate="{DataTemplate pages:ReportesAnalisis}"
+            Route="reportes"/>
+
+
+        <ShellContent
+            Icon="notificaciones.png"
+            ContentTemplate="{DataTemplate pages:Chat}" />  
+        
+        
+        <ShellContent
+            Icon="configuraciones.svg"
+            ContentTemplate="{DataTemplate pages:Chat}" />
+        
+
+    </TabBar>
 
 </Shell>
