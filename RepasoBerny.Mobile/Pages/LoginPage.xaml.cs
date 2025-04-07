@@ -1,4 +1,4 @@
-namespace RepasoBerny.Mobile.Pages;
+using Microsoft.Maui.Controls;
 
 public partial class LoginPage : ContentPage
 {
@@ -6,13 +6,4 @@ public partial class LoginPage : ContentPage
 	{
 		InitializeComponent();
 	}
-    private void PhoneEntry_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        var entry = (Entry)sender;
-        string text = entry.Text.Replace("+", "");
-        
-        if (text.Length > 4)
-            text = text.Substring(0, 4);
-        entry.Text = "+" + text;
-    }
 }

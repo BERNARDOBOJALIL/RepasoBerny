@@ -4,135 +4,188 @@
              x:Class="RepasoBerny.Mobile.Pages.ReportesAnalisis"
              xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
              BackgroundColor="White">
-    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        
-        <Grid Grid.Row="0" BackgroundColor="{StaticResource YellowCoppel}">
-            <Label Text="Reportes y análisis" 
-                   TextColor="{StaticResource BlueCoppel}"
-                   FontSize="24" 
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center" 
-                   VerticalOptions="Center" 
-                   Margin="5"/>
-        </Grid>
 
-    <ScrollView Grid.Row="1">
-            <VerticalStackLayout>
+    <StackLayout>
+        <!-- Detectar el tap en toda la pantalla -->
+        <StackLayout.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnScreenTapped"/>
+        </StackLayout.GestureRecognizers>
+
+        <!-- Línea amarilla en la parte superior -->
+        <BoxView Grid.Row="0" HeightRequest="5" BackgroundColor="{StaticResource YellowCoppel}"/>
+
+        <!-- Barra amarilla con texto "Inicia sesión" -->
+        <StackLayout Grid.Row="1" BackgroundColor="{StaticResource YellowCoppel}" Padding="0">
+            <Label 
+        Text="Reportes y análisis"
+        FontSize="24"
+        FontAttributes="Bold"
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+        TextColor="{StaticResource BlueCoppel}"
+        Margin="5"/>
+        </StackLayout>
+
+
+
+
+        <!-- ScrollView para contenido desplazable -->
+        <ScrollView VerticalOptions="FillAndExpand">
+            <VerticalStackLayout Padding="10" Spacing="15">
+
+                <!-- Filtro de periodo -->
+                <Frame Padding="10" BackgroundColor="LightGrey" HasShadow="False">
+                    <StackLayout>
+                        <Label Text="Periodo:" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                        <Picker BackgroundColor="LightYellow" TextColor="Black">
+                            <Picker.Items>
+                                <x:String>Último mes</x:String>
+                                <x:String>Última semana</x:String>
+                                <x:String>Último año</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Gráfico de progreso mensual -->
+                <Frame Padding="10" BackgroundColor="LightGrey" HasShadow="False">
+                    <StackLayout>
+                        <Label Text="Progreso Mensual de usuarios registrados" 
+                               FontAttributes="Bold" 
+                               HorizontalOptions="Center"
+                               TextColor="Black"/>
+                        <skia:SKCanvasView HeightRequest="150" PaintSurface="OnCanvasViewPaintSurface" BackgroundColor="White"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Padding="5" BackgroundColor="LightGrey" HasShadow="False">
+                    <StackLayout>
+                        <Label Text="Métricas clave" FontAttributes="Bold" 
+               HorizontalOptions="Center" TextColor="Black"/>
+
+                        <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto" Padding="2">
+                            <Frame Grid.Column="0" BackgroundColor="#FFFFFF" CornerRadius="5"
+                   WidthRequest="85" HeightRequest="85" Margin="2" Padding="2">
+                                <StackLayout VerticalOptions="CenterAndExpand" 
+                             HorizontalOptions="CenterAndExpand"
+                             Spacing="2">
+                                    <Label Text="24" FontSize="16" FontAttributes="Bold" 
+                           TextColor="#007AFF" HorizontalOptions="Center"/>
+                                    <Label Text="Usuarios activos" FontSize="11" 
+                           HorizontalTextAlignment="Center" 
+                           TextColor="Black" LineBreakMode="WordWrap"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <Frame Grid.Column="1" BackgroundColor="#FFFFFF" CornerRadius="5"
+                   WidthRequest="85" HeightRequest="85" Margin="2" Padding="2">
+                                <StackLayout VerticalOptions="CenterAndExpand" 
+                             HorizontalOptions="CenterAndExpand"
+                             Spacing="2">
+                                    <Label Text="3" FontSize="16" FontAttributes="Bold" 
+                           TextColor="#007AFF" HorizontalOptions="Center"/>
+                                    <Label Text="Nuevos hoy" FontSize="11" 
+                           HorizontalTextAlignment="Center" 
+                           TextColor="Black" LineBreakMode="WordWrap"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <Frame Grid.Column="2" BackgroundColor="#FFFFFF" CornerRadius="5"
+                   WidthRequest="85" HeightRequest="85" Margin="2" Padding="2">
+                                <StackLayout VerticalOptions="CenterAndExpand" 
+                             HorizontalOptions="CenterAndExpand"
+                             Spacing="2">
+                                    <Label Text="1" FontSize="16" FontAttributes="Bold" 
+                           TextColor="#007AFF" HorizontalOptions="Center"/>
+                                    <Label Text="Promedio diario" FontSize="11" 
+                           HorizontalTextAlignment="Center" 
+                           TextColor="Black" LineBreakMode="WordWrap"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <Frame Grid.Column="3" BackgroundColor="#FFFFFF" CornerRadius="5"
+                   WidthRequest="85" HeightRequest="85" Margin="2" Padding="2">
+                                <StackLayout VerticalOptions="CenterAndExpand" 
+                             HorizontalOptions="CenterAndExpand"
+                             Spacing="2">
+                                    <Label Text="2" FontSize="16" FontAttributes="Bold" 
+                           TextColor="#007AFF" HorizontalOptions="Center"/>
+                                    <Label Text="Arriba del promedio" FontSize="11" 
+                           HorizontalTextAlignment="Center" 
+                           TextColor="Black" LineBreakMode="WordWrap"/>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+
+
+
+
+
 
                 <Frame Padding="10" Margin="10" BackgroundColor="LightGrey" HasShadow="False">
-            <StackLayout>
-                <Label Text="Periodo:" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
-                <Picker BackgroundColor="LightYellow" TextColor="Black">
-                    <Picker.Items>
-                        <x:String>Último mes</x:String>
-                        <x:String>Última semana</x:String>
-                        <x:String>Último año</x:String>
-                    </Picker.Items>
-                </Picker>
-            </StackLayout>
-        </Frame>
-
-        <Frame Padding="10" Margin="10" BackgroundColor="LightGrey" HasShadow="False">
-            <StackLayout>
-                <Label Text="Progreso Mensual de usuarios registrados" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Black"/>
-                <skia:SKCanvasView HeightRequest="150" PaintSurface="OnCanvasViewPaintSurface" BackgroundColor="White"/>
-            </StackLayout>
-        </Frame>
-
-
-        <Frame Padding="10" Margin="10" BackgroundColor="LightGrey" HasShadow="False">
-            <StackLayout>
-                <Label Text="Métricas clave" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Black"/>
-                <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto" Padding="5">
-                    <Frame Grid.Column="0" BackgroundColor="#FFFFFF" CornerRadius="5"
-                   WidthRequest="100" HeightRequest="100" Margin="5"
-                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
-                            <Label Text="24" FontSize="18" FontAttributes="Bold" TextColor="#007AFF" HorizontalOptions="Center"/>
-                            <Label Text="Usuarios activos" FontSize="14" LineBreakMode="WordWrap" HorizontalOptions="Center" TextColor="Black"/>
-                        </StackLayout>
-                    </Frame>
-                    <Frame Grid.Column="1" BackgroundColor="#FFFFFF" CornerRadius="5"
-                   WidthRequest="100" HeightRequest="100" Margin="5"
-                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
-                            <Label Text="3" FontSize="18" FontAttributes="Bold" TextColor="#007AFF" HorizontalOptions="Center"/>
-                            <Label Text="Nuevos hoy" FontSize="14" LineBreakMode="WordWrap" HorizontalOptions="Center" TextColor="Black"/>
-                        </StackLayout>
-                    </Frame>
-                    <Frame Grid.Column="2" BackgroundColor="#FFFFFF" CornerRadius="5"
-                   WidthRequest="100" HeightRequest="100" Margin="5"
-                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
-                            <Label Text="1" FontSize="18" FontAttributes="Bold" TextColor="#007AFF" HorizontalOptions="Center"/>
-                            <Label Text="Promedio diario" FontSize="14" LineBreakMode="WordWrap" HorizontalOptions="Center" TextColor="Black"/>
-                        </StackLayout>
-                    </Frame>
-                    <Frame Grid.Column="3" BackgroundColor="#FFFFFF" CornerRadius="5"
-                   WidthRequest="100" HeightRequest="100" Margin="5"
-                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
-                            <Label Text="2" FontSize="18" FontAttributes="Bold" TextColor="#007AFF" HorizontalOptions="Center"/>
-                            <Label Text="Arriba del promedio" FontSize="14" LineBreakMode="WordWrap" HorizontalOptions="Center" TextColor="Black"/>
-                        </StackLayout>
-                    </Frame>
-                </Grid>
-            </StackLayout>
-        </Frame>
-
-
-
-
-
-        <Frame Padding="10" Margin="10" BackgroundColor="LightGrey" HasShadow="False">
-            <StackLayout>
-                <Label Text="Última actividad de usuarios registrados" 
+                    <StackLayout>
+                        <Label Text="Última actividad de usuarios registrados" 
                FontAttributes="Bold" 
                HorizontalOptions="Center"
-               FontSize="16"/>
+               FontSize="16" TextColor="Black"/>
 
-                <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto" Padding="5">
-                    <!-- Encabezados -->
-                    <Frame BackgroundColor="#FFD700" Grid.Column="0" Grid.Row="0">
-                        <Label Text="Nombre" FontAttributes="Bold" HorizontalOptions="Center"/>
+                        <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto,Auto,Auto" Padding="5">
+                            <!-- Encabezados -->
+                            <Frame BackgroundColor="#FFD700" Grid.Column="0" Grid.Row="0" Padding="5" CornerRadius="5" WidthRequest="80" HeightRequest="30">
+                                <Label Text="Nombre" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Black" FontSize="10"/>
+                </Frame>
+                <Frame BackgroundColor="#FFD700" Grid.Column="1" Grid.Row="0" Padding="5" CornerRadius="5" WidthRequest="100" HeightRequest="30">
+                    <Label Text="Última Actividad" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Black" FontSize="10"/>
+                </Frame>
+                <Frame BackgroundColor="#FFD700" Grid.Column="2" Grid.Row="0" Padding="5" CornerRadius="5" WidthRequest="80" HeightRequest="30">
+                    <Label Text="Estado" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Black" FontSize="10"/>
+                </Frame>
+
+                <!-- Filas de datos -->
+                            <Label Text="JaviTacos" Grid.Column="0" Grid.Row="1" HorizontalOptions="Center" TextColor="Black" />
+                            <Label Text="Hace 10 min" Grid.Column="1" Grid.Row="1" HorizontalOptions="Center" TextColor="Black"/>
+                            <Label Text="Activo" Grid.Column="2" Grid.Row="1" HorizontalOptions="Center" TextColor="Blue"/>
+
+                            <Label Text="Cemas 'Julita'" Grid.Column="0" Grid.Row="2" HorizontalOptions="Center" TextColor="Black"/>
+                            <Label Text="Hace 2 hrs" Grid.Column="1" Grid.Row="2" HorizontalOptions="Center" TextColor="Black"/>
+                            <Label Text="Activo" Grid.Column="2" Grid.Row="2" HorizontalOptions="Center" TextColor="Blue"/>
+
+                            <Label Text="Antojitos 'Perez'" Grid.Column="0" Grid.Row="3" HorizontalOptions="Center" TextColor="Black"/>
+                            <Label Text="Hace 1 día" Grid.Column="1" Grid.Row="3" HorizontalOptions="Center" TextColor="Black"/>
+                            <Label Text="Activo" Grid.Column="2" Grid.Row="3" HorizontalOptions="Center" TextColor="Blue"/>
+
+                            
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+
+
+                <!-- Botones de exportación -->
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="1">
+                    <!-- Botón Exportar a PDF con ícono pequeño -->
+                    <Frame BackgroundColor="#FFD700" Padding="10" CornerRadius="10" HasShadow="False" BorderColor="Transparent">
+                        <HorizontalStackLayout Spacing="10">
+                            <Image Source="descarga.png" WidthRequest="25" HeightRequest="25"/>
+                            <Label Text="Exportar a PDF" TextColor="Black" FontSize="16" VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
                     </Frame>
-                    <Frame BackgroundColor="#FFD700" Grid.Column="1" Grid.Row="0">
-                        <Label Text="Última Actividad" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+                    <!-- Botón Exportar a Excel con ícono pequeño -->
+                    <Frame BackgroundColor="#00AEEF" Padding="10" CornerRadius="10" HasShadow="False" BorderColor="Transparent">
+                        <HorizontalStackLayout Spacing="10">
+                            <Image Source="descarga.png" WidthRequest="25" HeightRequest="25"/>
+                            <Label Text="Exportar a Excel" TextColor="White" FontSize="16" VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
                     </Frame>
-                    <Frame BackgroundColor="#FFD700" Grid.Column="2" Grid.Row="0">
-                        <Label Text="Estado" FontAttributes="Bold" HorizontalOptions="Center"/>
-                    </Frame>
-
-                    <!-- Filas de datos -->
-                    <Label Text="JaviTacos" Grid.Column="0" Grid.Row="1" HorizontalOptions="Center"/>
-                    <Label Text="Hace 10 min" Grid.Column="1" Grid.Row="1" HorizontalOptions="Center"/>
-                    <Label Text="Activo" Grid.Column="2" Grid.Row="1" HorizontalOptions="Center" TextColor="Blue"/>
-
-                    <Label Text="Cemas 'Julita'" Grid.Column="0" Grid.Row="2" HorizontalOptions="Center"/>
-                    <Label Text="Hace 2 hrs" Grid.Column="1" Grid.Row="2" HorizontalOptions="Center"/>
-                    <Label Text="Activo" Grid.Column="2" Grid.Row="2" HorizontalOptions="Center" TextColor="Blue"/>
-
-                    <Label Text="Antojitos 'Perez'" Grid.Column="0" Grid.Row="3" HorizontalOptions="Center"/>
-                    <Label Text="Hace 1 día" Grid.Column="1" Grid.Row="3" HorizontalOptions="Center"/>
-                    <Label Text="Activo" Grid.Column="2" Grid.Row="3" HorizontalOptions="Center" TextColor="Blue"/>
-                </Grid>
-            </StackLayout>
-        </Frame>
+                </StackLayout>
 
 
 
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-            <Button Text="Exportar a PDF" BackgroundColor="#FFD700" WidthRequest="150" Margin="5"/>
-            <Button Text="Exportar a PDF" BackgroundColor="#00AEEF" TextColor="White" WidthRequest="150" Margin="5"/>
-        </StackLayout>
-                
-        
-    </VerticalStackLayout>
-    </ScrollView>
-    </Grid>
+
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </StackLayout>
 </ContentPage>

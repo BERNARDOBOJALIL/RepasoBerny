@@ -5,7 +5,7 @@
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new Pages.LoginPage());
+            MainPage = new NavigationPage(new Pages.ReportesAnalisis());
             //MainPage = new AppShell();
 
         }

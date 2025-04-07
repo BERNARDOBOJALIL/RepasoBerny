@@ -4,6 +4,11 @@
              x:Class="RepasoBerny.Mobile.Pages.Seguimiento">
 
     <Grid>
+		<!-- Detectar el tap en toda la pantalla -->
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnScreenTapped"/>
+        </Grid.GestureRecognizers>
+		
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -12,12 +17,13 @@
         <!-- Barra superior con título -->
         <Grid Grid.Row="0" BackgroundColor="{StaticResource YellowCoppel}">
             <Label Text="Seguimiento" 
+                   
                    TextColor="{StaticResource BlueCoppel}"
                    FontSize="24" 
                    FontAttributes="Bold"
                    HorizontalOptions="Center" 
                    VerticalOptions="Center" 
-                   Margin="5"/>
+                   Margin="10"/>
         </Grid>
 
 

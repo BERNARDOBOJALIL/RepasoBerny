@@ -1,14 +1,14 @@
 namespace RepasoBerny.Mobile.Pages;
 
-public partial class Seguimiento : ContentPage
+public partial class Offline : ContentPage
 {
-	public Seguimiento()
+	public Offline()
 	{
 		InitializeComponent();
 	}
 
     private async void OnScreenTapped(object sender, TappedEventArgs e)
     {
-        await Navigation.PushAsync(new ReportesAnalisis());
+        await Navigation.PushAsync(new Chat()); 
     }
 }
