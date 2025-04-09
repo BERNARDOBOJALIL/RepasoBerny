@@ -5,9 +5,6 @@
     <ScrollView>
         <VerticalStackLayout  Spacing="25">
             <!-- Detectar el tap en toda la pantalla -->
-            <VerticalStackLayout.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OnScreenTapped"/>
-            </VerticalStackLayout.GestureRecognizers>
 
             
             <!-- Barra amarilla con texto "Inicia sesión" -->

@@ -12,6 +12,7 @@
     Shell.TabBarTitleColor="{StaticResource BlueCoppel}"
     Shell.TabBarUnselectedColor="White">
 
+    
     <TabBar>
 
         

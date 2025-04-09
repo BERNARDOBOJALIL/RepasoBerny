@@ -3,10 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RepasoBerny.Mobile.Pages.Register">
     <Grid>
-        <!-- Detectar el tap en toda la pantalla -->
-        <Grid.GestureRecognizers>
-            <TapGestureRecognizer Tapped="OnScreenTapped"/>
-        </Grid.GestureRecognizers>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="5"/>

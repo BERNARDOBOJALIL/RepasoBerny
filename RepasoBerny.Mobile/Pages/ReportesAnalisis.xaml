@@ -6,8 +6,22 @@
              BackgroundColor="White">
 
     <ScrollView>
-        <VerticalStackLayout Padding="10" Spacing="15">
 
+        
+        <VerticalStackLayout >
+            <BoxView Grid.Row="0" HeightRequest="5" BackgroundColor="{StaticResource YellowCoppel}"/>
+
+            <StackLayout Grid.Row="1" BackgroundColor="{StaticResource YellowCoppel}" Padding="0">
+                <Label 
+                Text="Inicio"
+                FontSize="24"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                TextColor="{StaticResource BlueCoppel}"
+                Margin="5"/>
+            </StackLayout>
+            <StackLayout Padding="10" Spacing="15">
             <!-- MÉTRICAS CLAVE -->
             <Frame Padding="5" BackgroundColor="LightGrey" HasShadow="False">
                 <StackLayout>
@@ -114,17 +128,18 @@
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10">
                     <Frame BackgroundColor="#FFD700" Padding="10" CornerRadius="10" HasShadow="False">
                         <HorizontalStackLayout Spacing="10">
-                            <Image Source="descarga.png" WidthRequest="25" HeightRequest="25"/>
+                            <Image Source="descarga.svg" WidthRequest="25" HeightRequest="25"/>
                             <Label Text="Exportar a PDF" TextColor="Black" FontSize="16" VerticalOptions="Center"/>
                         </HorizontalStackLayout>
                     </Frame>
 
                     <Frame BackgroundColor="#00AEEF" Padding="10" CornerRadius="10" HasShadow="False">
                         <HorizontalStackLayout Spacing="10">
-                            <Image Source="descarga.png" WidthRequest="25" HeightRequest="25"/>
+                            <Image Source="descarga.svg" WidthRequest="25" HeightRequest="25"/>
                             <Label Text="Exportar a Excel" TextColor="White" FontSize="16" VerticalOptions="Center"/>
                         </HorizontalStackLayout>
                     </Frame>
+                </StackLayout>
                 </StackLayout>
 
             </StackLayout>

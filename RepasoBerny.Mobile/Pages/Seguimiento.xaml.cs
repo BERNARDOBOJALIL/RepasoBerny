@@ -7,8 +7,4 @@ public partial class Seguimiento : ContentPage
 		InitializeComponent();
 	}
 
-    private async void OnScreenTapped(object sender, TappedEventArgs e)
-    {
-        await Navigation.PushAsync(new ReportesAnalisis());
-    }
 }

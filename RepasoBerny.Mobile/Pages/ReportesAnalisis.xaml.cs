@@ -146,10 +146,6 @@ public partial class ReportesAnalisis : ContentPage
             canvas.DrawText(entry.Label, x, height - 10, SKTextAlign.Center, monthLabelFont, monthLabelPaint);
         }
     }
-    private async void OnScreenTapped(object sender, TappedEventArgs e)
-    {
-        await Navigation.PushAsync(new Offline()); 
-    }
     private void OnVerDetallesClicked(object sender, EventArgs e)
     {
         // Alternar visibilidad

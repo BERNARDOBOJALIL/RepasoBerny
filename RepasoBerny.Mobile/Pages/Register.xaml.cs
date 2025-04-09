@@ -15,8 +15,4 @@ public partial class Register : ContentPage
             text = text.Substring(0, 4);
         entry.Text = "+" + text;
     }
-    private async void OnScreenTapped(object sender, TappedEventArgs e)
-    {
-        await Navigation.PushAsync(new Seguimiento());
-    }
 }
