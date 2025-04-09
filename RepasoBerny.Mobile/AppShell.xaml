@@ -7,10 +7,10 @@
     xmlns:pages="clr-namespace:RepasoBerny.Mobile.Pages"
     Shell.FlyoutBehavior="Disabled"
     Title="RepasoBerny.Mobile"
-    Shell.TabBarBackgroundColor ="{StaticResource YellowCoppel}"
-    Shell.TabBarForegroundColor="White"
+    Shell.TabBarBackgroundColor ="White"
+    Shell.TabBarForegroundColor="{StaticResource BlueCoppel}"
     Shell.TabBarTitleColor="{StaticResource BlueCoppel}"
-    Shell.TabBarUnselectedColor="White">
+    Shell.TabBarUnselectedColor="Gray">
 
     
     <TabBar>
