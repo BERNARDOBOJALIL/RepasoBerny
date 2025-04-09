@@ -6,8 +6,20 @@ public partial class LoginPage : ContentPage
 	{
 		InitializeComponent();
 	}
-    private async void OnScreenTapped(object sender, TappedEventArgs e)
+    private async void OnLoginClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Register());
+        // Aquí podrías validar usuario/contraseña
+        bool loginSuccess = true; // Simulación
+
+        if (loginSuccess)
+        {
+            // Cambia al Shell
+            var app = Application.Current as App;
+            app?.NavigateToShell();
+        }
+        else
+        {
+            await DisplayAlert("Error", "Usuario o contraseña incorrectos", "OK");
+        }
     }
 }
