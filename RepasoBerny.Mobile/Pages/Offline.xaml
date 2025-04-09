@@ -40,21 +40,21 @@
                         <Frame BackgroundColor="#D9D9D9" Padding="10">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Text="Solo con Wi-Fi" TextColor="Black" VerticalOptions="Center" FontSize="14" />
-                                <Switch x:Name="WifiSwitch" Grid.Column="1" HorizontalOptions="End" OnColor="#00AEEF" ThumbColor="White" />
+                                <Switch x:Name="WifiSwitch" Grid.Column="1" HorizontalOptions="End" />
                             </Grid>
                         </Frame>
 
                         <Frame BackgroundColor="#D9D9D9" Padding="10">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Text="Sincronización automática" TextColor="Black" VerticalOptions="Center" FontSize="14" />
-                                <Switch x:Name="AutoSyncSwitch" Grid.Column="1" HorizontalOptions="End" IsToggled="True" OnColor="#00AEEF" ThumbColor="White" />
+                                <Switch x:Name="AutoSyncSwitch" Grid.Column="1" HorizontalOptions="End" />
                             </Grid>
                         </Frame>
 
                         <Frame BackgroundColor="#D9D9D9" Padding="10">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Text="Notificar al sincronizar" TextColor="Black" VerticalOptions="Center" FontSize="14" />
-                                <Switch x:Name="NotifySwitch" Grid.Column="1" HorizontalOptions="End" IsToggled="True" OnColor="#00AEEF" ThumbColor="White" />
+                                <Switch x:Name="NotifySwitch" Grid.Column="1" HorizontalOptions="End"  />
                             </Grid>
                         </Frame>
                     </VerticalStackLayout>
@@ -70,14 +70,14 @@
                         <Frame BackgroundColor="#D9D9D9" Padding="10">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Text="Pedir identificación siempre" TextColor="Black" VerticalOptions="Center" FontSize="14" />
-                                <Switch x:Name="RequestIdSwitch" Grid.Column="1" HorizontalOptions="End" IsToggled="True" OnColor="#00AEEF" ThumbColor="White" />
+                                <Switch x:Name="RequestIdSwitch" Grid.Column="1" HorizontalOptions="End"  />
                             </Grid>
                         </Frame>
 
                         <Frame BackgroundColor="#D9D9D9" Padding="10">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Text="Usar huella dactilar" TextColor="Black" VerticalOptions="Center" FontSize="14" />
-                                <Switch x:Name="FingerprintSwitch" Grid.Column="1" HorizontalOptions="End" IsToggled="True" OnColor="#00AEEF" ThumbColor="White" />
+                                <Switch x:Name="FingerprintSwitch" Grid.Column="1" HorizontalOptions="End"  />
                             </Grid>
                         </Frame>
                     </VerticalStackLayout>

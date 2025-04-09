@@ -1,4 +1,5 @@
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Storage;
 using System;
 using System.Collections.Generic;
 
@@ -6,20 +7,22 @@ namespace RepasoBerny.Mobile.Pages
 {
     public partial class Offline : ContentPage
     {
-        // Valores originales de los switches
         private Dictionary<string, bool> _originalValues;
 
         public Offline()
         {
             InitializeComponent();
 
-            // Guarda los valores originales cuando se carga la página
+            // Carga los valores guardados por el usuario
+            LoadSavedSettings();
+
+            // Guarda los valores originales
             StoreOriginalValues();
 
-            // Aplica los colores personalizados inicialmente
+            // Aplica los colores personalizados
             ApplySwitchColors();
 
-            // Suscribirse a eventos de cambio para cada switch
+            // Suscribirse a eventos
             WifiSwitch.Toggled += OnSwitchToggled;
             AutoSyncSwitch.Toggled += OnSwitchToggled;
             NotifySwitch.Toggled += OnSwitchToggled;
@@ -29,7 +32,6 @@ namespace RepasoBerny.Mobile.Pages
 
         private void ApplySwitchColors()
         {
-            // Aplica colores a todos los switches
             Color switchOnColor = Color.FromArgb("#00AEEF");
             Color thumbColor = Colors.White;
 
@@ -61,18 +63,38 @@ namespace RepasoBerny.Mobile.Pages
             };
         }
 
+        private void LoadSavedSettings()
+        {
+            WifiSwitch.IsToggled = Preferences.Get(nameof(WifiSwitch), false);
+            AutoSyncSwitch.IsToggled = Preferences.Get(nameof(AutoSyncSwitch), false);
+            NotifySwitch.IsToggled = Preferences.Get(nameof(NotifySwitch), false);
+            RequestIdSwitch.IsToggled = Preferences.Get(nameof(RequestIdSwitch), false);
+            FingerprintSwitch.IsToggled = Preferences.Get(nameof(FingerprintSwitch), false);
+        }
+
         private void OnSwitchToggled(object sender, ToggledEventArgs e)
         {
-            // Cuando cualquier switch cambia, nos aseguramos de mantener los colores personalizados
             if (sender is Switch switchControl)
             {
                 // Reaplica los colores personalizados
                 switchControl.OnColor = Color.FromArgb("#00AEEF");
                 switchControl.ThumbColor = Colors.White;
+
+                // Guarda la preferencia del usuario
+                Preferences.Set(switchControl.StyleId ?? switchControl.AutomationId ?? switchControl.ClassId ?? GetSwitchKey(switchControl), e.Value);
             }
 
-            // Verifica si hay cambios para actualizar el estado del botón
             CheckForChanges();
+        }
+
+        private string GetSwitchKey(Switch switchControl)
+        {
+            if (switchControl == WifiSwitch) return nameof(WifiSwitch);
+            if (switchControl == AutoSyncSwitch) return nameof(AutoSyncSwitch);
+            if (switchControl == NotifySwitch) return nameof(NotifySwitch);
+            if (switchControl == RequestIdSwitch) return nameof(RequestIdSwitch);
+            if (switchControl == FingerprintSwitch) return nameof(FingerprintSwitch);
+            return "UnknownSwitch";
         }
 
         private void CheckForChanges()
@@ -84,34 +106,35 @@ namespace RepasoBerny.Mobile.Pages
                 RequestIdSwitch.IsToggled != _originalValues[nameof(RequestIdSwitch)] ||
                 FingerprintSwitch.IsToggled != _originalValues[nameof(FingerprintSwitch)];
 
-            // Opcional: Puedes cambiar la apariencia del botón según si hay cambios o no
             RevertButton.IsEnabled = hasChanges;
             RevertButton.Opacity = hasChanges ? 1.0 : 0.5;
         }
 
         private async void OnRevertButtonClicked(object sender, EventArgs e)
         {
-            // Pregunta al usuario si realmente quiere revertir los cambios
             bool answer = await DisplayAlert("Revertir cambios",
                 "¿Estás seguro de que deseas revertir todos los cambios?",
                 "Sí", "No");
 
             if (answer)
             {
-                // Revierte a los valores originales
                 WifiSwitch.IsToggled = _originalValues[nameof(WifiSwitch)];
                 AutoSyncSwitch.IsToggled = _originalValues[nameof(AutoSyncSwitch)];
                 NotifySwitch.IsToggled = _originalValues[nameof(NotifySwitch)];
                 RequestIdSwitch.IsToggled = _originalValues[nameof(RequestIdSwitch)];
                 FingerprintSwitch.IsToggled = _originalValues[nameof(FingerprintSwitch)];
 
-                // Reasegura que los colores se mantengan
+                // Elimina las preferencias guardadas
+                Preferences.Remove(nameof(WifiSwitch));
+                Preferences.Remove(nameof(AutoSyncSwitch));
+                Preferences.Remove(nameof(NotifySwitch));
+                Preferences.Remove(nameof(RequestIdSwitch));
+                Preferences.Remove(nameof(FingerprintSwitch));
+
                 ApplySwitchColors();
 
-                // Opcional: Muestra un mensaje de confirmación
                 await DisplayAlert("Confirmación", "Los cambios han sido revertidos", "OK");
 
-                // Actualiza el estado del botón
                 CheckForChanges();
             }
         }
