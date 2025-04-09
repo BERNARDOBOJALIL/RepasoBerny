@@ -8,7 +8,7 @@ namespace RepasoBerny.Mobile
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new LoginPage());
+            MainPage = new NavigationPage(new Chat());
         }
 
         public void NavigateToShell()
