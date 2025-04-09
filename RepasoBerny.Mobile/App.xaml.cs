@@ -8,11 +8,14 @@ namespace RepasoBerny.Mobile
         public App()
         {
             InitializeComponent();
-            //MainPage = new NavigationPage(new LoginPage());
+            MainPage = new NavigationPage(new LoginPage());
+        }
+
+        public void NavigateToShell()
+        {
             var shell = new AppShell();
             Application.Current.MainPage = shell;
             shell.GoToAsync("//reportes");
-
         }
     }
 }

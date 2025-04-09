@@ -4,9 +4,6 @@
              x:Class="RepasoBerny.Mobile.Pages.LoginPage">
     <Grid>
         <!-- Detectar el tap en toda la pantalla -->
-        <Grid.GestureRecognizers>
-            <TapGestureRecognizer Tapped="OnScreenTapped"/>
-        </Grid.GestureRecognizers>
 
         <!-- Definimos las filas para la estructura -->
         <Grid.RowDefinitions>
@@ -85,7 +82,8 @@
                     TextColor="White"
                     Margin="0,20"
                     CornerRadius="30"
-                    HeightRequest="50"/>
+                    HeightRequest="50"
+                    Clicked="OnLoginClicked"/>
             </VerticalStackLayout>
         </ScrollView>
     </Grid>
