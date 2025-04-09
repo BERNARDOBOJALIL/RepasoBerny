@@ -39,7 +39,7 @@
         
         <ShellContent
             Icon="configuraciones.svg"
-            ContentTemplate="{DataTemplate pages:Chat}" />
+            ContentTemplate="{DataTemplate pages:Offline}" />
         
 
     </TabBar>

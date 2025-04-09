@@ -3,112 +3,99 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RepasoBerny.Mobile.Pages.Offline">
     <ScrollView>
-        <VerticalStackLayout  Spacing="25">
-            <!-- Detectar el tap en toda la pantalla -->
-
-            
-            <!-- Barra amarilla con texto "Inicia sesión" -->
-            <StackLayout Grid.Row="1" BackgroundColor="{StaticResource YellowCoppel}" Padding="0">
+        <VerticalStackLayout Spacing="25">
+            <!-- Barra superior con título -->
+            <StackLayout BackgroundColor="{StaticResource YellowCoppel}" Padding="0">
                 <Label 
-                    Text="Modo Offline"
+                    Text="Configuración"
                     FontSize="24"
                     FontAttributes="Bold"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     TextColor="{StaticResource BlueCoppel}"
                     Margin="10"/>
-                        </StackLayout>
+            </StackLayout>
 
-
-            <!-- Estado Offline -->
+            <!-- Perfil del usuario -->
             <Frame Margin="20,10" BackgroundColor="{StaticResource Gray100}">
                 <Grid ColumnDefinitions="Auto,*,Auto" Padding="2" ColumnSpacing="15">
-                    <!-- Ícono -->
-                    <Ellipse Grid.Column="0" WidthRequest="50" HeightRequest="50" Fill="Red" VerticalOptions="Center" />
+                    <!-- Foto de perfil-->
+                    <Ellipse Grid.Column="0" WidthRequest="50" HeightRequest="50" Fill="{StaticResource BlueCoppel}" VerticalOptions="Center" />
 
-                    <!-- Texto -->
-                    <VerticalStackLayout Grid.Column="1"  VerticalOptions="Center">
-                        <Label Text="Modo offline" FontSize="18" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Start"/>
-                        <Label Text="Último intento hace 2 horas" FontSize="14" TextColor="Black" HorizontalOptions="Start"/>
+                    <!-- Información del usuario -->
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                        <Label Text="Usuario Coppel" FontSize="18" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Start"/>
+                        <Label Text="usuario@coppel.com" FontSize="14" TextColor="Black" HorizontalOptions="Start"/>
                     </VerticalStackLayout>
 
-                    <!-- Botón -->
-                    <Button Grid.Column="2" Text="Reintentar" BackgroundColor="#00AEEF" TextColor="Black" CornerRadius="5" Padding="10,5" VerticalOptions="Center" />
                 </Grid>
             </Frame>
 
-
-            <Frame Margin="20,1" BackgroundColor="{StaticResource Gray100}">
+            <!-- Ajustes generales -->
+            <Frame Margin="20,1" BackgroundColor="#EDEDED">
                 <VerticalStackLayout>
-                    <Label Margin="0,0,0,15" HorizontalOptions="Center" TextColor="Black" Text="Datos pendientes de sincronizar" FontSize="16" FontAttributes="Bold" />
-                    <Frame Margin="2,2" BackgroundColor="Gray">
-                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="15">
-                            <!-- Ícono -->
-                            <Frame WidthRequest="50" HeightRequest="50" CornerRadius="4" BackgroundColor="Yellow" Padding="0">
-                                <Label Text="4" FontSize="Default" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center" />
-                            </Frame>
-                            
-                            <!-- Texto -->
-                            <VerticalStackLayout Grid.Column="1" Spacing="5">
-                                <Label Text="Registros pendientes" TextColor="Black" FontSize="14"/>
-                                <Label Text="Últimas 24 horas" TextColor="Black" FontSize="12"/>
-                            </VerticalStackLayout>
-                           
-
-                            <!-- Botón -->
-                            <Button Grid.Column="2" Text="Ver detalle" BackgroundColor="#00AEEF" TextColor="Black" CornerRadius="5" Padding="5,0" />
-                        </Grid>
-                    </Frame>
-                </VerticalStackLayout>
-            </Frame>
-
-            <Frame Margin="20,10" BackgroundColor="{StaticResource Gray100}">
-                <VerticalStackLayout>
-                    <Label Text="Ajustes de sincronización" FontSize="16" TextColor="Black" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,15" />
+                    <Label Margin="0,0,0,15" HorizontalOptions="Center" TextColor="Black" Text="Ajustes de Sincronización" FontSize="16" FontAttributes="Bold" />
 
                     <VerticalStackLayout Spacing="10">
-                        <Frame BackgroundColor="Gray" Padding="10">
+                        <Frame BackgroundColor="#D9D9D9" Padding="10">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Text="Solo con Wi-Fi" TextColor="Black" VerticalOptions="Center" FontSize="14" />
-                                <Switch Grid.Column="1" HorizontalOptions="End" />
+                                <Switch x:Name="WifiSwitch" Grid.Column="1" HorizontalOptions="End" OnColor="#00AEEF" ThumbColor="White" />
                             </Grid>
                         </Frame>
 
-                        <Frame BackgroundColor="Gray" Padding="10">
+                        <Frame BackgroundColor="#D9D9D9" Padding="10">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Text="Sincronización automática" TextColor="Black" VerticalOptions="Center" FontSize="14" />
-                                <Switch Grid.Column="1" HorizontalOptions="End" />
+                                <Switch x:Name="AutoSyncSwitch" Grid.Column="1" HorizontalOptions="End" IsToggled="True" OnColor="#00AEEF" ThumbColor="White" />
                             </Grid>
                         </Frame>
 
-                        <Frame BackgroundColor="Gray" Padding="10">
+                        <Frame BackgroundColor="#D9D9D9" Padding="10">
                             <Grid ColumnDefinitions="*,Auto">
                                 <Label Text="Notificar al sincronizar" TextColor="Black" VerticalOptions="Center" FontSize="14" />
-                                <Switch Grid.Column="1" HorizontalOptions="End" />
+                                <Switch x:Name="NotifySwitch" Grid.Column="1" HorizontalOptions="End" IsToggled="True" OnColor="#00AEEF" ThumbColor="White" />
                             </Grid>
                         </Frame>
                     </VerticalStackLayout>
                 </VerticalStackLayout>
             </Frame>
 
+            <!-- Ajustes de sincronización -->
+            <Frame Margin="20,10" BackgroundColor="#EDEDED">
+                <VerticalStackLayout>
+                    <Label Text="Acceso Rápido" FontSize="16" TextColor="Black" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,15" />
 
-            <Frame Margin="20,0,20,0" BackgroundColor="{StaticResource Gray100}">
-                <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
-                    <Label Text="Historial de sincronización" FontSize="16" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" />
-                    <Frame BackgroundColor="Gray">
-                        <Label Text="✔ 2 Registros sincronizados - Hoy, 12:30 hrs" TextColor="Black" FontSize="14"  />
-                    </Frame>
-                    <Frame BackgroundColor="Gray">
-                        <Label Text="❌ Sincronización fallida - Hoy, 11:15 hrs" TextColor="Black" FontSize="14"  />
-                    </Frame>
-                    <Frame BackgroundColor="Gray">
-                        <Label Text="✔ 2 Registros sincronizados - Hoy, 10:00 hrs" TextColor="Black" FontSize="14" />
-                    </Frame>
+                    <VerticalStackLayout Spacing="10">
+                        <Frame BackgroundColor="#D9D9D9" Padding="10">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Pedir identificación siempre" TextColor="Black" VerticalOptions="Center" FontSize="14" />
+                                <Switch x:Name="RequestIdSwitch" Grid.Column="1" HorizontalOptions="End" IsToggled="True" OnColor="#00AEEF" ThumbColor="White" />
+                            </Grid>
+                        </Frame>
+
+                        <Frame BackgroundColor="#D9D9D9" Padding="10">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Usar huella dactilar" TextColor="Black" VerticalOptions="Center" FontSize="14" />
+                                <Switch x:Name="FingerprintSwitch" Grid.Column="1" HorizontalOptions="End" IsToggled="True" OnColor="#00AEEF" ThumbColor="White" />
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- Botón de sincronización -->
-            <Button Margin="25,0,25,25" HeightRequest="80" Text="Sincronizar ahora 🔄" BackgroundColor="#00AEEF" TextColor="White" CornerRadius="10" FontSize="18" Padding="10" />
+            <!-- Botón de guardar cambios -->
+            <Button 
+                x:Name="RevertButton"
+                Margin="25,0,25,25" 
+                HeightRequest="60" 
+                Text="Revertir cambios" 
+                BackgroundColor="#00AEEF" 
+                TextColor="White" 
+                CornerRadius="10" 
+                FontSize="18" 
+                Padding="10" 
+                Clicked="OnRevertButtonClicked" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
