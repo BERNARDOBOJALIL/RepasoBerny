@@ -1,3 +1,4 @@
+using RepasoBerny.Mobile.ViewModel;
 namespace RepasoBerny.Mobile.Pages;
 
 public partial class Register : ContentPage
@@ -5,7 +6,8 @@ public partial class Register : ContentPage
 	public Register()
 	{
 		InitializeComponent();
-	}
+        BindingContext = new RegistroViewModel();
+    }
     private void PhoneEntry_TextChanged(object sender, TextChangedEventArgs e)
     {
         var entry = (Entry)sender;
