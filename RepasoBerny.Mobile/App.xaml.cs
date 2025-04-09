@@ -11,6 +11,8 @@ namespace RepasoBerny.Mobile
         {
             InitializeComponent();
             MainPage = new NavigationPage(new LoginPage());
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "usuarios.db3");
+            Database = new UsuarioDatabase(dbPath);
         }
 
         public void NavigateToShell()
