@@ -1,9 +1,7 @@
-// PARTE 2: Code-behind corregido - Seguimiento.xaml.cs
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Shapes;
 using System;
 using System.Collections.Generic;
-
 namespace RepasoBerny.Mobile.Pages
 {
     public partial class Seguimiento : ContentPage
@@ -11,12 +9,30 @@ namespace RepasoBerny.Mobile.Pages
         private bool isCandidatosActive = true;
         private Dictionary<string, bool> expandedStates = new Dictionary<string, bool>();
 
+        // Define colores para usar en la aplicación
+        private static readonly Color TabSelectedColor = Colors.Transparent;
+        private static readonly Color TabUnselectedColor = Colors.Transparent;
+
         public Seguimiento()
         {
             InitializeComponent();
-
             // Cargar los datos de candidatos por defecto
             LoadCandidatosData();
+
+            // Suscribirse al evento de cambio de tema
+            Application.Current.RequestedThemeChanged += (s, a) =>
+            {
+                // Recargar los datos para actualizar todos los controles con los nuevos colores
+                if (isCandidatosActive)
+                    LoadCandidatosData();
+                else
+                    LoadRegistradosData();
+            };
+        }
+
+        private async void OnComenzarEncuestaClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Survey());
         }
 
         void OnCandidatosTabTapped(object sender, EventArgs e)
@@ -25,12 +41,12 @@ namespace RepasoBerny.Mobile.Pages
             {
                 // Hacer que el tab Candidatos se vea seleccionado (más grande)
                 CandidatosTab.Scale = 1.1;
-                CandidatosTab.BackgroundColor = Color.FromHex("#FFEEAA");
+                CandidatosTab.BackgroundColor = GetTabBackgroundColor(true);
                 CandidatosTab.ZIndex = 1;
 
                 // Hacer que el tab Registrados se vea deseleccionado
                 RegistradosTab.Scale = 1.0;
-                RegistradosTab.BackgroundColor = Colors.Transparent;
+                RegistradosTab.BackgroundColor = TabUnselectedColor;
                 RegistradosTab.ZIndex = 0;
 
                 // Guardar el estado de las tarjetas expandidas antes de limpiar
@@ -38,7 +54,6 @@ namespace RepasoBerny.Mobile.Pages
 
                 // Aquí puedes cargar los datos de candidatos
                 LoadCandidatosData();
-
                 isCandidatosActive = true;
             }
         }
@@ -49,12 +64,12 @@ namespace RepasoBerny.Mobile.Pages
             {
                 // Hacer que el tab Registrados se vea seleccionado (más grande)
                 RegistradosTab.Scale = 1.1;
-                RegistradosTab.BackgroundColor = Color.FromHex("#FFEEAA");
+                RegistradosTab.BackgroundColor = GetTabBackgroundColor(true);
                 RegistradosTab.ZIndex = 1;
 
                 // Hacer que el tab Candidatos se vea deseleccionado
                 CandidatosTab.Scale = 1.0;
-                CandidatosTab.BackgroundColor = Colors.Transparent;
+                CandidatosTab.BackgroundColor = TabUnselectedColor;
                 CandidatosTab.ZIndex = 0;
 
                 // Guardar el estado de las tarjetas expandidas antes de limpiar
@@ -62,7 +77,6 @@ namespace RepasoBerny.Mobile.Pages
 
                 // Aquí puedes cargar los datos de registrados
                 LoadRegistradosData();
-
                 isCandidatosActive = false;
             }
         }
@@ -71,12 +85,10 @@ namespace RepasoBerny.Mobile.Pages
         {
             // Obtener el ID de la tarjeta desde el CommandParameter
             string cardId = e.Parameter?.ToString();
-
             if (!string.IsNullOrEmpty(cardId))
             {
                 // Buscar el contenido expandible en el layout
                 var cardLayout = RegistrosContainer.Children.FirstOrDefault(c => c is VerticalStackLayout vsl && vsl.ClassId == $"RegistroCard{cardId}") as VerticalStackLayout;
-
                 if (cardLayout != null)
                 {
                     // Encontrar el contenido expandible dentro de la tarjeta
@@ -91,6 +103,20 @@ namespace RepasoBerny.Mobile.Pages
                             {
                                 // Alternar visibilidad del contenido expandible
                                 expandedContent.IsVisible = !expandedContent.IsVisible;
+
+                                // Buscar la flecha y actualizar su rotación manualmente (para los casos dinámicos)
+                                var headerGrid = grid.Children[0] as Grid;
+                                if (headerGrid != null)
+                                {
+                                    // La flecha está en la segunda columna
+                                    var arrowLabel = headerGrid.Children.FirstOrDefault(c => c is Label && headerGrid.GetColumn((IView)c) == 1) as Label;
+                                    if (arrowLabel != null)
+                                    {
+                                        // Animar la rotación de la flecha
+                                        var targetRotation = expandedContent.IsVisible ? 90 : 0;
+                                        arrowLabel.RotateTo(targetRotation, 150, Easing.CubicOut);
+                                    }
+                                }
 
                                 // Guardar el estado en el diccionario
                                 expandedStates[$"ExpandedContent{cardId}"] = expandedContent.IsVisible;
@@ -109,7 +135,6 @@ namespace RepasoBerny.Mobile.Pages
                 if (child is VerticalStackLayout cardLayout)
                 {
                     string cardId = cardLayout.ClassId.Replace("RegistroCard", "");
-
                     var border = cardLayout.Children.FirstOrDefault() as Border;
                     if (border != null)
                     {
@@ -221,6 +246,73 @@ namespace RepasoBerny.Mobile.Pages
             };
         }
 
+        // Métodos auxiliares para obtener colores según el tema
+        private Color GetTabBackgroundColor(bool isSelected)
+        {
+            if (!isSelected)
+                return TabUnselectedColor;
+
+            return Application.Current.RequestedTheme == AppTheme.Dark
+                ? Color.FromHex("#8A7A00")
+                : Color.FromHex("#FFEEAA");
+        }
+
+        private Color GetCardBackgroundColor()
+        {
+            return Application.Current.RequestedTheme == AppTheme.Dark
+                ? Color.FromHex("#242424")
+                : Colors.White;
+        }
+
+        private Color GetCardStrokeColor()
+        {
+            return Application.Current.RequestedTheme == AppTheme.Dark
+                ? Colors.DimGray
+                : Colors.LightGray;
+        }
+
+        private Color GetTextColor()
+        {
+            return Application.Current.RequestedTheme == AppTheme.Dark
+                ? Colors.White
+                : Colors.Black;
+        }
+
+        private Color GetSecondaryTextColor()
+        {
+            return Application.Current.RequestedTheme == AppTheme.Dark
+                ? Colors.LightGray
+                : Colors.Black;
+        }
+
+        private Color GetExpandedBackgroundColor()
+        {
+            return Application.Current.RequestedTheme == AppTheme.Dark
+                ? Color.FromHex("#2A2A2A")
+                : Color.FromHex("#FBF9F1");
+        }
+
+        private Color GetHighlightColor()
+        {
+            return Application.Current.RequestedTheme == AppTheme.Dark
+                ? Color.FromHex("#8A7A00")
+                : Color.FromHex("#FFEEAA");
+        }
+
+        private Color GetInputBackgroundColor()
+        {
+            return Application.Current.RequestedTheme == AppTheme.Dark
+                ? Color.FromHex("#333333")
+                : Colors.White;
+        }
+
+        private Color GetPlaceholderColor()
+        {
+            return Application.Current.RequestedTheme == AppTheme.Dark
+                ? Colors.DarkGray
+                : Colors.Gray;
+        }
+
         // Para crear tarjetas dinámicamente
         private VerticalStackLayout CreateRegistroCard(string id, string nombre, string direccion,
                                       string visitado, string estado, string proximaCita)
@@ -235,8 +327,9 @@ namespace RepasoBerny.Mobile.Pages
             var border = new Border
             {
                 StrokeShape = new Rectangle(),
-                Stroke = Colors.LightGray,
-                StrokeThickness = 1
+                Stroke = GetCardStrokeColor(),
+                StrokeThickness = 1,
+                BackgroundColor = GetCardBackgroundColor()
             };
 
             // Crear el grid principal
@@ -254,51 +347,81 @@ namespace RepasoBerny.Mobile.Pages
 
             // Crear el StackLayout para la información del registro
             var infoStack = new VerticalStackLayout { Spacing = 5 };
-
-            infoStack.Add(new Label { Text = nombre, FontAttributes = FontAttributes.Bold });
-            infoStack.Add(new Label { Text = direccion });
-            infoStack.Add(new Label { Text = $"Visitado: {visitado}", Margin = new Thickness(0, 5, 0, 0) });
-            infoStack.Add(new Label { Text = $"Estado: {estado}" });
-            infoStack.Add(new Label { Text = $"Hora próximo: {proximaCita}" });
-
+            infoStack.Add(new Label
+            {
+                Text = nombre,
+                FontAttributes = FontAttributes.Bold,
+                TextColor = GetTextColor()
+            });
+            infoStack.Add(new Label
+            {
+                Text = direccion,
+                TextColor = GetSecondaryTextColor()
+            });
+            infoStack.Add(new Label
+            {
+                Text = $"Visitado: {visitado}",
+                Margin = new Thickness(0, 5, 0, 0),
+                TextColor = GetSecondaryTextColor()
+            });
+            infoStack.Add(new Label
+            {
+                Text = $"Estado: {estado}",
+                TextColor = GetSecondaryTextColor()
+            });
+            infoStack.Add(new Label
+            {
+                Text = $"Hora próximo: {proximaCita}",
+                TextColor = GetSecondaryTextColor()
+            });
             visibleGrid.Add(infoStack, 0, 0);
-            visibleGrid.Add(new Label
+
+            // Crear la flecha con una etiqueta
+            var arrowLabel = new Label
             {
                 Text = ">",
                 FontSize = 20,
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.End,
-                TextColor = Colors.Gray
-            }, 1, 0);
+                TextColor = Application.Current.RequestedTheme == AppTheme.Dark ? Colors.LightGray : Colors.Gray,
+                ClassId = $"ArrowIcon{id}" // Para identificarlo fácilmente
+            };
+            visibleGrid.Add(arrowLabel, 1, 0);
 
             // Crear el contenido expandible
             var expandedContent = new VerticalStackLayout
             {
                 IsVisible = expandedStates.ContainsKey($"ExpandedContent{id}") ? expandedStates[$"ExpandedContent{id}"] : false,
-                BackgroundColor = Color.FromHex("#FBF9F1"),
+                BackgroundColor = GetExpandedBackgroundColor(),
                 ClassId = $"ExpandedContent{id}"
             };
+
+            // Si el contenido está expandido, girar la flecha
+            if (expandedContent.IsVisible)
+            {
+                arrowLabel.Rotation = 90;
+            }
 
             // Dropdown para actualizar estado
             var estadoGrid = new Grid { Margin = new Thickness(0, 10, 0, 0) };
             var estadoBorder = new Border
             {
                 Margin = new Thickness(15, 0),
-                BackgroundColor = Color.FromHex("#FFEEAA"),
+                BackgroundColor = GetHighlightColor(),
                 StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(5) }
             };
-
             var estadoPicker = new Picker
             {
                 Title = "Actualizar Estado",
                 FontSize = 16,
-                Margin = new Thickness(10, 5)
+                Margin = new Thickness(10, 5),
+                TextColor = GetTextColor(),
+                TitleColor = GetTextColor()
             };
             estadoPicker.Items.Add("No interesado por el momento");
             estadoPicker.Items.Add("Pendiente de alta");
             estadoPicker.Items.Add("Completado");
             estadoPicker.Items.Add("Programado");
-
             estadoBorder.Content = estadoPicker;
             estadoGrid.Add(estadoBorder);
             expandedContent.Add(estadoGrid);
@@ -308,6 +431,7 @@ namespace RepasoBerny.Mobile.Pages
             {
                 Text = "Programar Próxima Cita",
                 FontSize = 16,
+                TextColor = GetTextColor(),
                 Margin = new Thickness(15, 15, 15, 5)
             });
 
@@ -316,17 +440,17 @@ namespace RepasoBerny.Mobile.Pages
             {
                 Margin = new Thickness(15, 0),
                 StrokeShape = new Rectangle(),
-                Stroke = Colors.LightGray,
-                StrokeThickness = 1
+                Stroke = GetCardStrokeColor(),
+                StrokeThickness = 1,
+                BackgroundColor = GetInputBackgroundColor()
             };
-
             var datePicker = new DatePicker
             {
                 Format = "D",
                 MinimumDate = DateTime.Today,
+                TextColor = GetTextColor(),
                 Margin = new Thickness(10, 5)
             };
-
             dateBorder.Content = datePicker;
             expandedContent.Add(dateBorder);
 
@@ -335,16 +459,16 @@ namespace RepasoBerny.Mobile.Pages
             {
                 Margin = new Thickness(15, 10, 15, 0),
                 StrokeShape = new Rectangle(),
-                Stroke = Colors.LightGray,
-                StrokeThickness = 1
+                Stroke = GetCardStrokeColor(),
+                StrokeThickness = 1,
+                BackgroundColor = GetInputBackgroundColor()
             };
-
             var timePicker = new TimePicker
             {
                 Format = "t",
+                TextColor = GetTextColor(),
                 Margin = new Thickness(10, 5)
             };
-
             timeBorder.Content = timePicker;
             expandedContent.Add(timeBorder);
 
@@ -353,25 +477,26 @@ namespace RepasoBerny.Mobile.Pages
             {
                 Text = "Agregar Nota:",
                 FontSize = 16,
+                TextColor = GetTextColor(),
                 Margin = new Thickness(15, 15, 15, 5)
             });
-
             var notaBorder = new Border
             {
                 Margin = new Thickness(15, 0, 15, 10),
                 StrokeShape = new Rectangle(),
-                Stroke = Colors.LightGray,
+                Stroke = GetCardStrokeColor(),
                 StrokeThickness = 1,
-                HeightRequest = 100
+                HeightRequest = 100,
+                BackgroundColor = GetInputBackgroundColor()
             };
-
             var notaEditor = new Editor
             {
                 Placeholder = "Escribe una nota aquí...",
+                PlaceholderColor = GetPlaceholderColor(),
+                TextColor = GetTextColor(),
                 AutoSize = EditorAutoSizeOption.TextChanges,
                 Margin = new Thickness(5)
             };
-
             notaBorder.Content = notaEditor;
             expandedContent.Add(notaBorder);
 
@@ -379,15 +504,32 @@ namespace RepasoBerny.Mobile.Pages
             var guardarButton = new Button
             {
                 Text = "Guardar visita",
-                BackgroundColor = Color.FromHex("#FFEEAA"),
-                TextColor = Colors.Black,
+                BackgroundColor = GetHighlightColor(),
+                TextColor = GetTextColor(),
                 CornerRadius = 5,
                 HorizontalOptions = LayoutOptions.Center,
                 WidthRequest = 200,
                 Margin = new Thickness(0, 0, 0, 20)
             };
 
+            var Encuesta = new Button
+            {
+                Text = "Comenzar encuesta",
+                BackgroundColor = GetHighlightColor(),
+                TextColor = GetTextColor(),
+                CornerRadius = 5,
+                HorizontalOptions = LayoutOptions.Center,
+                WidthRequest = 200,
+                Margin = new Thickness(0, 0, 0, 20)
+            };
+
+            Encuesta.Clicked += async (s, e) =>
+            {
+                await Navigation.PushAsync(new Survey());
+            };
+
             expandedContent.Add(guardarButton);
+            expandedContent.Add(Encuesta);
 
             // Agregar todo al grid principal
             mainGrid.Add(visibleGrid, 0, 0);

@@ -82,7 +82,8 @@ namespace RepasoBerny.Mobile.Pages
         private async void OnRegresarClick(object sender, EventArgs e)
         {
             // Cambia esta línea si tu navegación funciona diferente (por Shell, por ejemplo)
-            await Navigation.PushAsync(new Seguimiento());
+           await Navigation.PopAsync();
+
         }
 
         // Lógica para asegurar que solo se seleccione una opción en preguntas "Sí / No"
