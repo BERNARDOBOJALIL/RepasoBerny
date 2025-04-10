@@ -1,131 +1,252 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:system="clr-namespace:System;assembly=netstandard"
              x:Class="RepasoBerny.Mobile.Pages.Seguimiento">
-
     <Grid>
-
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <!-- Barra superior con título -->
-        <Grid Grid.Row="0" BackgroundColor="{StaticResource YellowCoppel}">
+        <!-- Barra superior azul -->
+        <Grid Grid.Row="0" BackgroundColor="#00A7E1" HeightRequest="50"/>
+        <!-- Título con fondo amarillo -->
+        <Grid Grid.Row="1" BackgroundColor="#FFDA44">
             <Label Text="Seguimiento" 
-                   
-                   TextColor="{StaticResource BlueCoppel}"
+                   TextColor="#0072BC"
                    FontSize="24" 
                    FontAttributes="Bold"
                    HorizontalOptions="Center" 
                    VerticalOptions="Center" 
                    Margin="10"/>
         </Grid>
+        <!-- Contenido principal -->
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!-- Tabs de navegación -->
+            <Grid Grid.Row="0" Margin="15,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <!-- Tab Candidatos (seleccionado por defecto) -->
+                <Border Grid.Column="0" x:Name="CandidatosTab" 
+                        BackgroundColor="#FFEEAA"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="1"
+                        Scale="1.1"
+                        Margin="0,0,5,0">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnCandidatosTabTapped"/>
+                    </Border.GestureRecognizers>
+                    <Label Text="Candidatos" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"
+                           FontAttributes="Bold"
+                           Margin="10"/>
+                </Border>
+               
+               
+                <!-- Tab Registrados -->
+                <Border Grid.Column="2" x:Name="RegistradosTab" 
+                        BackgroundColor="Transparent"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="1"
+                        Margin="5,0,0,0">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnRegistradosTabTapped"/>
+                    </Border.GestureRecognizers>
+                    <Label Text="Registrados" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"
+                           Margin="10"/>
+                </Border>
+            </Grid>
+            <!-- Lista de registros -->
+            <ScrollView Grid.Row="1">
+                <VerticalStackLayout x:Name="RegistrosContainer" Spacing="10" Margin="15,0,15,15">
+                    <!-- Aquí se agregarán las tarjetas de registro de forma dinámica -->
+                    <!-- Template de tarjeta de registro -->
+                    <VerticalStackLayout x:Name="RegistroCard1">
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnCardTapped" CommandParameter="1"/>
+                        </VerticalStackLayout.GestureRecognizers>
+                        <Border StrokeShape="Rectangle" Stroke="LightGray" StrokeThickness="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <!-- Contenido visible de la tarjeta -->
+                                <Grid Grid.Row="0" Padding="15">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                        <Label Text="tortillas moi" FontAttributes="Bold"/>
+                                        <Label Text="Dirección"/>
+                                        <Label Text="Visitado: 3-10-2025" Margin="0,5,0,0"/>
+                                        <Label Text="Estado: rechazado\ pendiente\ completado"/>
+                                        <Label Text="Hora próximo: Lunes 29 4:00pm"/>
+                                    </VerticalStackLayout>
+                                    <Label Grid.Column="1" 
+                                           Text=">" 
+                                           FontSize="20"
+                                           VerticalOptions="Center" 
+                                           HorizontalOptions="End"
+                                           TextColor="Gray"/>
+                                </Grid>
+                                <!-- Contenido expandible (oculto por defecto) -->
+                                <VerticalStackLayout Grid.Row="1" x:Name="ExpandedContent1" IsVisible="false" BackgroundColor="#FBF9F1">
+                                    <!-- Dropdown para actualizar estado -->
+                                    <Grid Margin="0,10,0,0">
+                                        <Border Margin="15,0" BackgroundColor="#FFEEAA" StrokeShape="RoundRectangle 5">
+                                            <Picker Title="Actualizar Estado" 
+                                                    x:Name="EstadoPicker" 
+                                                    FontSize="16"
+                                                    Margin="10,5">
+                                                <Picker.Items>
+                                                    <x:String>No interesado por el momento</x:String>
+                                                    <x:String>Pendiente de alta</x:String>
+                                                    <x:String>Completado</x:String>
+                                                    <x:String>Programado</x:String>
+                                                </Picker.Items>
+                                            </Picker>
+                                        </Border>
+                                    </Grid>
+                                    <!-- Programar próxima cita -->
+                                    <Label Text="Programar Próxima Cita" 
+                                           FontSize="16" 
+                                           Margin="15,15,15,5"/>
+                                    <!-- Selector de fecha -->
+                                    <Border Margin="15,0" StrokeShape="Rectangle" Stroke="LightGray" StrokeThickness="1">
+                                        <DatePicker x:Name="CitaDatePicker" 
+                                                    Format="D" 
+                                                    MinimumDate="{Binding Source={x:Static system:DateTime.Today}}"
+                                                    Margin="10,5"/>
+                                    </Border>
+                                    <!-- Selector de hora -->
+                                    <Border Margin="15,10,15,0" StrokeShape="Rectangle" Stroke="LightGray" StrokeThickness="1">
+                                        <TimePicker x:Name="CitaTimePicker" 
+                                                    Format="t"
+                                                    Margin="10,5"/>
+                                    </Border>
+                                    <!-- Área para notas -->
+                                    <Label Text="Agregar Nota:" 
+                                           FontSize="16" 
+                                           Margin="15,15,15,5"/>
+                                    <Border Margin="15,0,15,10" StrokeShape="Rectangle" Stroke="LightGray" StrokeThickness="1" HeightRequest="100">
+                                        <Editor x:Name="NotaEditor" 
+                                                Placeholder="Escribe una nota aquí..." 
+                                                AutoSize="TextChanges"
+                                                Margin="5"/>
+                                    </Border>
+                                    <!-- Botón para guardar -->
+                                    <Button Text="Guardar visita" 
+                                            BackgroundColor="#FFEEAA" 
+                                            TextColor="Black"
+                                            CornerRadius="5"
+                                            HorizontalOptions="Center"
+                                            WidthRequest="200"
+                                            Margin="0,0,0,20"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </VerticalStackLayout>
 
-
-        <!-- Lista de seguimiento -->
-        <ScrollView Grid.Row="1">
-            <VerticalStackLayout Spacing="0">
-                <Border Margin="15,10" Padding="15" StrokeShape="RoundRectangle 10">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <VerticalStackLayout Grid.Column="0">
-                            <Label Text="Emilio Ramírez se ha registrado!" FontAttributes="Bold"/>
-                            <Label Text="3-10-2025" TextColor="Gray"/>
-                            <Label Text="Ánimalo a seguir con su progreso" TextColor="Gray"/>
-                        </VerticalStackLayout>
-                        <Label Grid.Column="1" Text=">" VerticalOptions="Center" TextColor="Gray"/>
-                    </Grid>
-                </Border>
-
-                <Border Margin="15,10" Padding="15" StrokeShape="RoundRectangle 10">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <VerticalStackLayout Grid.Column="0">
-                            <Label Text="Paco Perez se ha registrado!" FontAttributes="Bold"/>
-                            <Label Text="10-10-2025" TextColor="Gray"/>
-                            <Label Text="Ánimalo a seguir con su progreso" TextColor="Gray"/>
-                        </VerticalStackLayout>
-                        <Label Grid.Column="1" Text=">" VerticalOptions="Center" TextColor="Gray"/>
-                    </Grid>
-                </Border>
-                <Border Margin="15,10" Padding="15" StrokeShape="RoundRectangle 10">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <VerticalStackLayout Grid.Column="0">
-                            <Label Text="Sofia Aldama se ha registrado!" FontAttributes="Bold"/>
-                            <Label Text="10-10-2025" TextColor="Gray"/>
-                            <Label Text="Ánimalo a seguir con su progreso" TextColor="Gray"/>
-                        </VerticalStackLayout>
-                        <Label Grid.Column="1" Text=">" VerticalOptions="Center" TextColor="Gray"/>
-                    </Grid>
-                </Border>
-                <Border Margin="15,10" Padding="15" StrokeShape="RoundRectangle 10">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <VerticalStackLayout Grid.Column="0">
-                            <Label Text="Pedro Caballero se ha registrado!" FontAttributes="Bold"/>
-                            <Label Text="10-10-2025" TextColor="Gray"/>
-                            <Label Text="Ánimalo a seguir con su progreso" TextColor="Gray"/>
-                        </VerticalStackLayout>
-                        <Label Grid.Column="1" Text=">" VerticalOptions="Center" TextColor="Gray"/>
-                    </Grid>
-                </Border>
-                <Border Margin="15,10" Padding="15" StrokeShape="RoundRectangle 10">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <VerticalStackLayout Grid.Column="0">
-                            <Label Text="Luis Alvarez se ha registrado!" FontAttributes="Bold"/>
-                            <Label Text="10-10-2025" TextColor="Gray"/>
-                            <Label Text="Ánimalo a seguir con su progreso" TextColor="Gray"/>
-                        </VerticalStackLayout>
-                        <Label Grid.Column="1" Text=">" VerticalOptions="Center" TextColor="Gray"/>
-                    </Grid>
-                </Border>
-                <Border Margin="15,10" Padding="15" StrokeShape="RoundRectangle 10">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <VerticalStackLayout Grid.Column="0">
-                            <Label Text="Eduardo Lopez se ha registrado!" FontAttributes="Bold"/>
-                            <Label Text="10-10-2025" TextColor="Gray"/>
-                            <Label Text="Ánimalo a seguir con su progreso" TextColor="Gray"/>
-                        </VerticalStackLayout>
-                        <Label Grid.Column="1" Text=">" VerticalOptions="Center" TextColor="Gray"/>
-                    </Grid>
-                </Border>
-                <Border Margin="15,10" Padding="15" StrokeShape="RoundRectangle 10">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <VerticalStackLayout Grid.Column="0">
-                            <Label Text="Bernardo Bojalil se ha registrado!" FontAttributes="Bold"/>
-                            <Label Text="10-10-2025" TextColor="Gray"/>
-                            <Label Text="Ánimalo a seguir con su progreso" TextColor="Gray"/>
-                        </VerticalStackLayout>
-                        <Label Grid.Column="1" Text=">" VerticalOptions="Center" TextColor="Gray"/>
-                    </Grid>
-                </Border>
-            </VerticalStackLayout>
-        </ScrollView>
+                    <!-- Segunda tarjeta de ejemplo -->
+                    <VerticalStackLayout x:Name="RegistroCard2">
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnCardTapped" CommandParameter="2"/>
+                        </VerticalStackLayout.GestureRecognizers>
+                        <Border StrokeShape="Rectangle" Stroke="LightGray" StrokeThickness="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <!-- Contenido visible de la tarjeta -->
+                                <Grid Grid.Row="0" Padding="15">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                        <Label Text="Panadería El Trigal" FontAttributes="Bold"/>
+                                        <Label Text="Av. Reforma #456"/>
+                                        <Label Text="Visitado: 5-10-2025" Margin="0,5,0,0"/>
+                                        <Label Text="Estado: rechazado"/>
+                                        <Label Text="Hora próximo: Martes 30 10:00am"/>
+                                    </VerticalStackLayout>
+                                    <Label Grid.Column="1" 
+                                           Text=">" 
+                                           FontSize="20"
+                                           VerticalOptions="Center" 
+                                           HorizontalOptions="End"
+                                           TextColor="Gray"/>
+                                </Grid>
+                                <!-- Contenido expandible (oculto por defecto) -->
+                                <VerticalStackLayout Grid.Row="1" x:Name="ExpandedContent2" IsVisible="false" BackgroundColor="#FBF9F1">
+                                    <!-- Dropdown para actualizar estado -->
+                                    <Grid Margin="0,10,0,0">
+                                        <Border Margin="15,0" BackgroundColor="#FFEEAA" StrokeShape="RoundRectangle 5">
+                                            <Picker Title="Actualizar Estado" 
+                                                    FontSize="16"
+                                                    Margin="10,5">
+                                                <Picker.Items>
+                                                    <x:String>No interesado por el momento</x:String>
+                                                    <x:String>Pendiente de alta</x:String>
+                                                    <x:String>Completado</x:String>
+                                                    <x:String>Programado</x:String>
+                                                </Picker.Items>
+                                            </Picker>
+                                        </Border>
+                                    </Grid>
+                                    <!-- Programar próxima cita -->
+                                    <Label Text="Programar Próxima Cita" 
+                                           FontSize="16" 
+                                           Margin="15,15,15,5"/>
+                                    <!-- Selector de fecha -->
+                                    <Border Margin="15,0" StrokeShape="Rectangle" Stroke="LightGray" StrokeThickness="1">
+                                        <DatePicker Format="D" 
+                                                    MinimumDate="{Binding Source={x:Static system:DateTime.Today}}"
+                                                    Margin="10,5"/>
+                                    </Border>
+                                    <!-- Selector de hora -->
+                                    <Border Margin="15,10,15,0" StrokeShape="Rectangle" Stroke="LightGray" StrokeThickness="1">
+                                        <TimePicker Format="t"
+                                                    Margin="10,5"/>
+                                    </Border>
+                                    <!-- Área para notas -->
+                                    <Label Text="Agregar Nota:" 
+                                           FontSize="16" 
+                                           Margin="15,15,15,5"/>
+                                    <Border Margin="15,0,15,10" StrokeShape="Rectangle" Stroke="LightGray" StrokeThickness="1" HeightRequest="100">
+                                        <Editor Placeholder="Escribe una nota aquí..." 
+                                                AutoSize="TextChanges"
+                                                Margin="5"/>
+                                    </Border>
+                                    <!-- Botón para guardar -->
+                                    <Button Text="Guardar visita" 
+                                            BackgroundColor="#FFEEAA" 
+                                            TextColor="Black"
+                                            CornerRadius="5"
+                                            HorizontalOptions="Center"
+                                            WidthRequest="200"
+                                            Margin="0,0,0,20"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Grid>
     </Grid>
 </ContentPage>
