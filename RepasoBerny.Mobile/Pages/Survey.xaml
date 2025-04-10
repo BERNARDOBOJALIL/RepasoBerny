@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RepasoBerny.Mobile.Pages.Survey"
+             Title="Encuesta de Impacto">
+
+    <Grid RowDefinitions="Auto, *" Padding="15">
+
+        <!-- Encabezado: barra de progreso + botón regresar -->
+        <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center" Spacing="10">
+            <ProgressBar x:Name="ProgresoBarra" Progress="0.25" HeightRequest="10" WidthRequest="333"/>
+        </HorizontalStackLayout>
+
+        <!-- Contenido principal -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="30" Padding="10">
+
+                <!-- Sección 1 -->
+                <StackLayout x:Name="Seccion1">
+                    <Label Text="Sección 1: Información general" FontAttributes="Bold" FontSize="20"/>
+
+                    <Label Text="Número de empleados al iniciar el programa:" />
+                    <Entry Placeholder="Ej. 3" Keyboard="Numeric"/>
+
+                    <Label Text="Número de empleados actualmente:" />
+                    <Entry Placeholder="Ej. 5" Keyboard="Numeric"/>
+
+                    <Label Text="¿El emprendimiento ha recibido inversión externa?" />
+                    <HorizontalStackLayout>
+                        <CheckBox x:Name="ChkInversionSi" CheckedChanged="OnUncheckOther"/>
+                        <Label Text="Sí" VerticalOptions="Center"/>
+                        <CheckBox x:Name="ChkInversionNo" CheckedChanged="OnUncheckOther"/>
+                        <Label Text="No" VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+                    <Entry Placeholder="¿Cuánto aproximadamente? $" Keyboard="Numeric"/>
+
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="35" Margin="0,25,0,0">
+                        <Button Text="Siguiente" Clicked="OnSiguienteSeccion1"/>
+                        <Button Text="Regresar" Clicked="OnRegresarClick" BackgroundColor="LightGray"/>
+                    </HorizontalStackLayout>
+                </StackLayout>
+
+                <!-- Sección 2 -->
+                <StackLayout x:Name="Seccion2" IsVisible="False">
+                    <Label Text="Sección 2: Participación en el Programa" FontAttributes="Bold" FontSize="20"/>
+
+                    <Label Text="Duración del programa:" />
+                    <Picker Title="Selecciona una opción">
+                        <Picker.Items>
+                            <x:String>Menos de 3 meses</x:String>
+                            <x:String>3-6 meses</x:String>
+                            <x:String>Más de 6 meses</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <Label Text="¿Qué tipo de apoyo recibiste?" />
+                    <VerticalStackLayout>
+                        <CheckBox />
+                        <Label Text="Mentoría"/>
+                        <CheckBox />
+                        <Label Text="Capacitación"/>
+                        <CheckBox />
+                        <Label Text="Financiamiento"/>
+                        <CheckBox />
+                        <Label Text="Espacio de trabajo"/>
+                        <CheckBox />
+                        <Label Text="Red de contactos"/>
+                        <CheckBox />
+                        <Label Text="Otro"/>
+                    </VerticalStackLayout>
+
+                    <Label Text="¿Cómo calificarías la calidad del programa?" />
+                    <Picker>
+                        <Picker.Items>
+                            <x:String>Excelente</x:String>
+                            <x:String>Buena</x:String>
+                            <x:String>Regular</x:String>
+                            <x:String>Mala</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <Label Text="¿Qué elementos del programa consideras más valiosos?" />
+                    <Editor Placeholder="Escribe aquí..." AutoSize="TextChanges"/>
+
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="35" Margin="0,25,0,0">
+                        <Button Text="Anterior" Clicked="OnAnteriorSeccion2"/>
+                        <Button Text="Siguiente" Clicked="OnSiguienteSeccion2"/>
+                        <Button Text="Regresar" Clicked="OnRegresarClick" BackgroundColor="LightGray"/>
+                    </HorizontalStackLayout>
+                </StackLayout>
+
+                <!-- Sección 3 -->
+                <StackLayout x:Name="Seccion3" IsVisible="False">
+                    <Label Text="Sección 3: Resultados e Impacto" FontAttributes="Bold" FontSize="20"/>
+
+                    <Label Text="¿El programa te ayudó a desarrollar habilidades empresariales?" />
+                    <HorizontalStackLayout>
+                        <CheckBox CheckedChanged="OnUncheckOther"/>
+                        <Label Text="Sí"/>
+                        <CheckBox CheckedChanged="OnUncheckOther"/>
+                        <Label Text="No"/>
+                    </HorizontalStackLayout>
+                    <Editor Placeholder="Si sí, ¿cuáles?" />
+
+                    <Label Text="¿Tu red de contactos profesionales creció a partir del programa?" />
+                    <HorizontalStackLayout>
+                        <CheckBox CheckedChanged="OnUncheckOther"/>
+                        <Label Text="Sí"/>
+                        <CheckBox CheckedChanged="OnUncheckOther"/>
+                        <Label Text="No"/>
+                    </HorizontalStackLayout>
+
+                    <Label Text="¿El programa contribuyó al crecimiento de tu negocio?" />
+                    <HorizontalStackLayout>
+                        <CheckBox CheckedChanged="OnUncheckOther"/>
+                        <Label Text="Sí"/>
+                        <CheckBox CheckedChanged="OnUncheckOther"/>
+                        <Label Text="No"/>
+                    </HorizontalStackLayout>
+                    <Editor Placeholder="¿De qué forma?" />
+
+                    <Label Text="¿Has generado empleos nuevos?" />
+                    <HorizontalStackLayout>
+                        <CheckBox CheckedChanged="OnUncheckOther"/>
+                        <Label Text="Sí"/>
+                        <CheckBox CheckedChanged="OnUncheckOther"/>
+                        <Label Text="No"/>
+                    </HorizontalStackLayout>
+                    <Entry Placeholder="¿Cuántos?" Keyboard="Numeric"/>
+
+                    <Label Text="¿Incrementaste ingresos tras participar?" />
+                    <HorizontalStackLayout>
+                        <CheckBox CheckedChanged="OnUncheckOther"/>
+                        <Label Text="Sí"/>
+                        <CheckBox CheckedChanged="OnUncheckOther"/>
+                        <Label Text="No"/>
+                    </HorizontalStackLayout>
+                    <Picker Title="¿En qué porcentaje?">
+                        <Picker.Items>
+                            <x:String>0-25%</x:String>
+                            <x:String>26-50%</x:String>
+                            <x:String>51-100%</x:String>
+                            <x:String>Más de 100%</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="35" Margin="0,25,0,0">
+                        <Button Text="Anterior" Clicked="OnAnteriorSeccion3"/>
+                        <Button Text="Siguiente" Clicked="OnSiguienteSeccion3"/>
+                        <Button Text="Regresar" Clicked="OnRegresarClick" BackgroundColor="LightGray"/>
+                    </HorizontalStackLayout>
+                </StackLayout>
+
+                <!-- Sección 4 -->
+                <StackLayout x:Name="Seccion4" IsVisible="False">
+                    <Label Text="Sección 4: Impacto en el Ecosistema" FontAttributes="Bold" FontSize="20"/>
+
+                    <Label Text="¿Has colaborado con otros emprendedores?" />
+                    <HorizontalStackLayout>
+                        <CheckBox CheckedChanged="OnUncheckOther"/>
+                        <Label Text="Sí"/>
+                        <CheckBox CheckedChanged="OnUncheckOther"/>
+                        <Label Text="No"/>
+                    </HorizontalStackLayout>
+
+                    <Label Text="¿Has compartido tus aprendizajes?" />
+                    <HorizontalStackLayout>
+                        <CheckBox CheckedChanged="OnUncheckOther"/>
+                        <Label Text="Sí"/>
+                        <CheckBox CheckedChanged="OnUncheckOther"/>
+                        <Label Text="No"/>
+                    </HorizontalStackLayout>
+
+                    <Label Text="¿Fortaleció el ecosistema emprendedor de tu comunidad?" />
+                    <HorizontalStackLayout>
+                        <CheckBox CheckedChanged="OnUncheckOther"/>
+                        <Label Text="Sí"/>
+                        <CheckBox CheckedChanged="OnUncheckOther"/>
+                        <Label Text="No"/>
+                    </HorizontalStackLayout>
+                    <Editor Placeholder="Explica por qué" />
+
+                    <Label Text="¿Qué mejoras sugerirías para el programa?" />
+                    <Editor Placeholder="Escribe aquí..." />
+
+                    <Label Text="Comentario final (opcional):" />
+                    <Editor Placeholder="Opcional..." />
+
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="35" Margin="0,25,0,0">
+                        <Button Text="Anterior" Clicked="OnAnteriorSeccion4"/>
+                        <Button Text="Regresar" Clicked="OnRegresarClick" BackgroundColor="LightGray"/>
+                    </HorizontalStackLayout>
+                    <Button Text="Finalizar y Guardar" BackgroundColor="{StaticResource YellowCoppel}" TextColor="White" Margin="0,25,0,0"/>
+                </StackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
+

@@ -2,125 +2,93 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RepasoBerny.Mobile.Pages.Register">
-    <Grid>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="5"/>
-            <!-- Línea amarilla -->
-            <RowDefinition Height="45"/>
-            <!-- Barra amarilla con texto -->
-            <RowDefinition Height="*"/>
-            <!-- Contenido principal -->
-        </Grid.RowDefinitions>
+    <ScrollView>
+        <VerticalStackLayout Padding="25">
 
-        <BoxView Grid.Row="0" HeightRequest="5" BackgroundColor="{StaticResource YellowCoppel}"/>
+            <!-- Campo de Nombre -->
+            <Label Text="Nombre" />
+            <Frame CornerRadius="15" Padding="9" Margin="0,5">
+                <Entry Placeholder="Ingresa tu nombre"
+                       Text="{Binding Nombre, Mode=TwoWay}" />
+            </Frame>
+            <Label Text="{Binding NombreError}" TextColor="Red" FontSize="12" />
 
-        <StackLayout Grid.Row="1" BackgroundColor="{StaticResource YellowCoppel}" Padding="0">
-            <Label 
-                Text="Registro"
-                FontSize="24"
-                FontAttributes="Bold"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                TextColor="{StaticResource BlueCoppel}"
-                Margin="5"/>
-        </StackLayout>
+            <!-- Campo de Apellido -->
+            <Label Text="Apellido" />
+            <Frame CornerRadius="15" Padding="9" Margin="0,5">
+                <Entry Placeholder="Ingresa tu apellido"
+                       Text="{Binding Apellidos, Mode=TwoWay}" />
+            </Frame>
+            <Label Text="{Binding ApellidosError}" TextColor="Red" FontSize="12" />
 
-        <ScrollView Grid.Row="2">
-            <VerticalStackLayout Padding="20">
+            <!-- Campo de Contraseña -->
+            <Label Text="Contraseña" />
+            <Frame CornerRadius="15" Padding="9" Margin="0,5">
+                <Entry Placeholder="Ingresa una contraseña de 4 dígitos"
+                       IsPassword="True"
+                       Text="{Binding Contrasena, Mode=TwoWay}" />
+            </Frame>
+            <Label Text="{Binding ContrasenaError}" TextColor="Red" FontSize="12" />
 
-                <!-- Campo de Nombre -->
-                <Label Text="Nombre"
-                       HorizontalOptions="Start"
-                       Margin="0,10"/>
-                <Frame CornerRadius="15" Padding="9" Margin="0,10">
-                    <Entry Placeholder="Ingresa tu nombre"
-                           HorizontalTextAlignment="Start"/>
+            <!-- Campo de Confirmar Contraseña -->
+            <Label Text="Confirmar contraseña" />
+            <Frame CornerRadius="15" Padding="9" Margin="0,5">
+                <Entry Placeholder="Confirma tu contraseña"
+                       IsPassword="True"
+                       Text="{Binding Confirmarcontrasena, Mode=TwoWay}" />
+            </Frame>
+            <Label Text="{Binding ConfirmarContrasenaError}" TextColor="Red" FontSize="12" />
+
+            <!-- Campo de Tipo de Cliente (Picker) -->
+            <Label Text="¿Qué tipo de cliente eres?" />
+            <Frame CornerRadius="15" Padding="9" Margin="0,5">
+                <Picker ItemsSource="{Binding Tipos}"
+                        SelectedItem="{Binding Tipo, Mode=TwoWay}"
+                        Title="Selecciona una opción" />
+            </Frame>
+            <Label Text="{Binding TipoError}" TextColor="Red" FontSize="12" />
+
+            <!-- Campo de Teléfono -->
+            <Label Text="No. de teléfono" />
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Frame CornerRadius="15" Padding="9" Margin="0,5">
+                    <Entry Placeholder="+52"
+                           Text="{Binding Lada, Mode=TwoWay}"
+                           Keyboard="Numeric"/>
                 </Frame>
-
-                <!-- Campo de Apellido -->
-                <Label Text="Apellido"
-                       HorizontalOptions="Start"
-                       Margin="0,10"/>
-                <Frame CornerRadius="15" Padding="9" Margin="0,10">
-                    <Entry Placeholder="Ingresa tu apellido"
-                           HorizontalTextAlignment="Start"/>
+                <Frame CornerRadius="15" Padding="9" Margin="0,5">
+                    <Entry Placeholder="Ingresa tu número celular"
+                           Text="{Binding Numero, Mode=TwoWay}"
+                           Keyboard="Telephone"/>
                 </Frame>
+            </StackLayout>
+            <Label Text="{Binding LadaError}" TextColor="Red" FontSize="12" />
+            <Label Text="{Binding NumeroError}" TextColor="Red" FontSize="12" />
 
-                <!-- Campo de Contraseña -->
-                <Label Text="Contraseña"
-                       HorizontalOptions="Start"
-                       Margin="0,10"/>
-                <Frame CornerRadius="15" Padding="9" Margin="0,10">
-                    <Entry Placeholder="Ingresa una contraseña de 4 dígitos"
-                           IsPassword="True"
-                           HorizontalTextAlignment="Start"/>
-                </Frame>
+            <!-- Aceptación de términos -->
+            <CheckBox HorizontalOptions="Start" Margin="0,10"/>
+            <Label Text="Acepto los términos y condiciones y el aviso de privacidad"
+                   HorizontalOptions="Start"
+                   Margin="0,0,0,10"/>
 
-                <!-- Campo de Confirmar Contraseña -->
-                <Label Text="Confirmar contraseña"
-                       HorizontalOptions="Start"
-                       Margin="0,10"/>
-                <Frame CornerRadius="15" Padding="9" Margin="0,10">
-                    <Entry Placeholder="Confirma tu contraseña"
-                           IsPassword="True"
-                           HorizontalTextAlignment="Start"/>
-                </Frame>
+            <!-- Botón de registro -->
+            <Button Text="Regístrate"
+                    Command="{Binding RegistrarColaboradorCommand}"
+                    BackgroundColor="DarkBlue"
+                    TextColor="White"
+                    Margin="0,20"
+                    CornerRadius="30"
+                    HeightRequest="50"/>
 
-                <!-- Campo de Tipo de Cliente (Dropdown) con bordes redondeados -->
-                <Label Text="¿Qué tipo de cliente eres?"
-                       HorizontalOptions="Start"
-                       Margin="0,10"/>
-                <Frame CornerRadius="15" Padding="9" Margin="0,10">
-                    <Picker  Margin="0,10">
-                        <Picker.Items>
-                            <x:String>Cliente Bancoppel</x:String>
-                            <x:String>Crédito Coppel (tienda)</x:String>
-                            <x:String>Afore Bancoppe</x:String>
-                            <x:String>No soy cliente</x:String>
-                        </Picker.Items>
-                    </Picker>
-                </Frame>
+            <Button Text="Mostrar cantidad de registros"
+                    Command="{Binding MostrarCantidadUsuariosCommand}"
+                    BackgroundColor="Gray"
+                    TextColor="White"
+                    Margin="0,10"
+                    CornerRadius="30"
+                    HeightRequest="50"/>
 
-                <!-- Campo de Número de Teléfono con Extensión -->
-                <Label Text="No. de teléfono"
-                       HorizontalOptions="Start"
-                       Margin="0,10"/>
-                <StackLayout Orientation="Horizontal" Spacing="10">
-                    <Frame CornerRadius="15" Padding="9" Margin="0,10">
-                        <Entry Placeholder="+52"
-                               HorizontalTextAlignment="Start"
-                               TextChanged="PhoneEntry_TextChanged"
-                               Keyboard="Numeric"/>
-                    </Frame>
-                    <Frame CornerRadius="15" Padding="9" Margin="0,10">
-                        <Entry Placeholder="Ingresa tu número celular"
-                               Keyboard="Telephone"
-                               HorizontalTextAlignment="Start"/>
-                    </Frame>
-                </StackLayout>
-
-                <!-- Aceptación de términos -->
-                <CheckBox HorizontalOptions="Start" Margin="0,10"/>
-                <Label Text="Acepto los términos y condiciones y el aviso de privacidad"
-                       HorizontalOptions="Start"
-                       Margin="0,10"/>
-
-                <!-- Mensaje de seguridad -->
-                <Label Text="Por tu seguridad enviamos un mensaje a tu teléfono para validar tu información."
-                       FontSize="12"
-                       TextColor="Gray"
-                       HorizontalOptions="Start"
-                       Margin="0,5"/>
-
-                <!-- Botón de registro -->
-                <Button Text="Registrate"
-                        BackgroundColor="{StaticResource BlueCoppel}"
-                        TextColor="White"
-                        Margin="0,20"
-                        CornerRadius="30"
-                        HeightRequest="50"/>
-            </VerticalStackLayout>
-        </ScrollView>
-    </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

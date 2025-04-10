@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="RepasoBerny.Mobile.Pages.Chat"
     x:Name="ChatPage"
-    Title="Notificaciones"
     BackgroundColor="White">
 
     <Grid>
