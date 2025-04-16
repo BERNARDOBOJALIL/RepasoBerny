@@ -169,7 +169,8 @@ namespace RepasoBerny.Mobile.Pages
                     candidato.Direccion,
                     candidato.FechaVisita,
                     candidato.Estado,
-                    candidato.ProximaCita
+                    candidato.ProximaCita,
+                    true
                 ));
             }
         }
@@ -191,7 +192,8 @@ namespace RepasoBerny.Mobile.Pages
                     registrado.Direccion,
                     registrado.FechaVisita,
                     registrado.Estado,
-                    registrado.ProximaCita
+                    registrado.ProximaCita,
+                    false
                 ));
             }
         }
@@ -315,7 +317,7 @@ namespace RepasoBerny.Mobile.Pages
 
         // Para crear tarjetas dinámicamente
         private VerticalStackLayout CreateRegistroCard(string id, string nombre, string direccion,
-                                      string visitado, string estado, string proximaCita)
+                                  string visitado, string estado, string proximaCita, bool isCandidato)
         {
             // Crear un nuevo VerticalStackLayout para la tarjeta
             var cardLayout = new VerticalStackLayout
@@ -410,6 +412,36 @@ namespace RepasoBerny.Mobile.Pages
                 BackgroundColor = GetHighlightColor(),
                 StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(5) }
             };
+            // Declarar los controles que se actualizarán dinámicamente
+            var notaLabel = new Label
+            {
+                Text = "Agregar Nota:",
+                FontSize = 16,
+                TextColor = GetTextColor(),
+                Margin = new Thickness(15, 15, 15, 5)
+            };
+
+            var notaEditor = new Editor
+            {
+                Placeholder = "Escribe una nota aquí...",
+                PlaceholderColor = GetPlaceholderColor(),
+                TextColor = GetTextColor(),
+                AutoSize = EditorAutoSizeOption.TextChanges,
+                Margin = new Thickness(5)
+            };
+
+            var notaBorder = new Border
+            {
+                Margin = new Thickness(15, 0, 15, 10),
+                StrokeShape = new Rectangle(),
+                Stroke = GetCardStrokeColor(),
+                StrokeThickness = 1,
+                HeightRequest = 100,
+                BackgroundColor = GetInputBackgroundColor(),
+                Content = notaEditor
+            };
+
+            // Picker de estado
             var estadoPicker = new Picker
             {
                 Title = "Actualizar Estado",
@@ -418,13 +450,44 @@ namespace RepasoBerny.Mobile.Pages
                 TextColor = GetTextColor(),
                 TitleColor = GetTextColor()
             };
-            estadoPicker.Items.Add("No interesado por el momento");
-            estadoPicker.Items.Add("Pendiente de alta");
-            estadoPicker.Items.Add("Completado");
-            estadoPicker.Items.Add("Programado");
+
+            if (isCandidato)
+            {
+                estadoPicker.Items.Add("No interesado por el momento");
+                estadoPicker.Items.Add("Pendiente de alta");
+                estadoPicker.Items.Add("Programado");
+            }
+            else
+            {
+                estadoPicker.Items.Add("Cancelar participación");
+                estadoPicker.Items.Add("Pendiente de encuesta");
+                estadoPicker.Items.Add("Requiere seguimiento");
+            }
+
+            // Evento para actualizar el label y placeholder
+            estadoPicker.SelectedIndexChanged += (s, e) =>
+            {
+                var seleccionado = estadoPicker.SelectedItem?.ToString();
+
+                if (seleccionado == "Cancelar participación")
+                {
+                    notaLabel.Text = "Motivo de cancelación:";
+                    notaEditor.Placeholder = "Describe el motivo...";
+                }
+                else
+                {
+                    notaLabel.Text = "Agregar Nota:";
+                    notaEditor.Placeholder = "Escribe una nota aquí...";
+                }
+            };
+
+            // Agregar a la vista
             estadoBorder.Content = estadoPicker;
             estadoGrid.Add(estadoBorder);
             expandedContent.Add(estadoGrid);
+            expandedContent.Add(notaLabel);
+            expandedContent.Add(notaBorder);
+
 
             // Sección para programar cita
             expandedContent.Add(new Label
@@ -472,33 +535,6 @@ namespace RepasoBerny.Mobile.Pages
             timeBorder.Content = timePicker;
             expandedContent.Add(timeBorder);
 
-            // Área para notas
-            expandedContent.Add(new Label
-            {
-                Text = "Agregar Nota:",
-                FontSize = 16,
-                TextColor = GetTextColor(),
-                Margin = new Thickness(15, 15, 15, 5)
-            });
-            var notaBorder = new Border
-            {
-                Margin = new Thickness(15, 0, 15, 10),
-                StrokeShape = new Rectangle(),
-                Stroke = GetCardStrokeColor(),
-                StrokeThickness = 1,
-                HeightRequest = 100,
-                BackgroundColor = GetInputBackgroundColor()
-            };
-            var notaEditor = new Editor
-            {
-                Placeholder = "Escribe una nota aquí...",
-                PlaceholderColor = GetPlaceholderColor(),
-                TextColor = GetTextColor(),
-                AutoSize = EditorAutoSizeOption.TextChanges,
-                Margin = new Thickness(5)
-            };
-            notaBorder.Content = notaEditor;
-            expandedContent.Add(notaBorder);
 
             // Botón para guardar
             var guardarButton = new Button
@@ -509,27 +545,33 @@ namespace RepasoBerny.Mobile.Pages
                 CornerRadius = 5,
                 HorizontalOptions = LayoutOptions.Center,
                 WidthRequest = 200,
-                Margin = new Thickness(0, 0, 0, 20)
+                Margin = new Thickness(0, 20, 0, 20)
             };
 
-            var Encuesta = new Button
+            if (!isCandidato)
             {
-                Text = "Comenzar encuesta",
-                BackgroundColor = GetHighlightColor(),
-                TextColor = GetTextColor(),
-                CornerRadius = 5,
-                HorizontalOptions = LayoutOptions.Center,
-                WidthRequest = 200,
-                Margin = new Thickness(0, 0, 0, 20)
-            };
+                var Encuesta = new Button
+                {
+                    Text = "Comenzar encuesta",
+                    BackgroundColor = GetHighlightColor(),
+                    TextColor = GetTextColor(),
+                    CornerRadius = 5,
+                    HorizontalOptions = LayoutOptions.Center,
+                    WidthRequest = 200,
+                    Margin = new Thickness(0, 20, 0, 20)
+                };
 
-            Encuesta.Clicked += async (s, e) =>
-            {
-                await Navigation.PushAsync(new Survey());
-            };
+                Encuesta.Clicked += async (s, e) =>
+                {
+                    await Navigation.PushAsync(new Survey());
+                };
+
+                expandedContent.Add(Encuesta);
+            }
+
 
             expandedContent.Add(guardarButton);
-            expandedContent.Add(Encuesta);
+
 
             // Agregar todo al grid principal
             mainGrid.Add(visibleGrid, 0, 0);
